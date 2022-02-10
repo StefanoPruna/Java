@@ -17,9 +17,10 @@ public class TestOne {
     public static void main(String[] args) 
     {
         Test myTest = new Test();
+        TestTwo mySecondTest = new TestTwo();
         
         myTest.questionOne();
-        myTest.questionTwo();
+        mySecondTest.questionTwo();
         myTest.questionThree();
     }
     

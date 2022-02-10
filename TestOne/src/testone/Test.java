@@ -18,7 +18,7 @@ public class Test
     public void questionOne()
     {        
         int firstNumber, secondNumber;        
-        JOptionPane.showMessageDialog(new JFrame(), "Insert the first number: ");
+        JOptionPane.showMessageDialog(new JFrame(), "Show a message ");
         String age = JOptionPane.showInputDialog(new JFrame(),"Insert the first number: ");
         JOptionPane.showMessageDialog(new JFrame(),"the number you have inserted is " + age);
         System.out.println(age);
@@ -27,17 +27,6 @@ public class Test
         int total = Integer.valueOf(valueOne) + Integer.valueOf(value2);
         */
         //System.exit(0);
-    }
-    
-    public void questionTwo()
-    {
-        System.out.println("Test one");
-        int myAge = 12; //primitive data type
-        //String is a data type and it can be a method too
-        String name = "stefano"; 
-        name.toUpperCase();
-        System.out.print("My age is " + myAge);
-        System.out.println("this line is not in the next line");
     }
     
     public void questionThree()
