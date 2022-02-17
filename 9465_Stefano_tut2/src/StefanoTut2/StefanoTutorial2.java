@@ -1,21 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package StefanoTut2;
 
-/**
- *
- * @author makem
- */
 public class StefanoTutorial2 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) 
+    {
+        Tutorial2Task1 questionOne = new Tutorial2Task1();       
+        questionOne.taskOne();
+        
+        Tutorial2Task2 questionTwo = new Tutorial2Task2();
+        questionTwo.taskTwo();
+        
+        Tutorial2Task3 questionThree = new Tutorial2Task3();
+        questionThree.taskThree();
+        
+        Tutorial2Task4 questionFour = new Tutorial2Task4();
+        questionFour.taskFour();
+        
+        System.exit(0);
     }
     
 }
