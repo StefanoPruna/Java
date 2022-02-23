@@ -7,15 +7,28 @@ public class Java_Expression
 {
     public static void main(String[] args) 
     {
-        prefixAndPostFix();
-        ConditionsExample taskOne = new ConditionsExample();        
-        taskOne.conditions();
-        loops();
-        
+//        prefixAndPostFix();
+//        ConditionsExample taskOne = new ConditionsExample();        
+//        taskOne.conditions();
+//        loops();
+        /*
+        Helpful tips in order
+        Use private vars/classes
+        Use The constructor with parameters and its empty constructor
+        Use the Getters and Setters
+        Use the Override toString method
+        */
         //Initialize a new Object dog with the class Pets
-        Pets dog = new Pets();
-        dog.name = "Obi";
+        //Pets dog = new Pets();
+        //dog.name = "Obi"; 
+//        dog.setName("Obi"); //if name is private, use this method
+//        dog.setCategory("Sausages and Dauchand");
+//        dog.setLegsNumber(4);
+        //because I have create the construct in Pets class, I can use this line below
+        Pets dog = new Pets("Obi", "Sausages and Dauchand", 4);
         dog.run();
+        dog.breathe();
+        System.out.println(dog.toString());//it's referring to the override shortcut in Pets class
     }
     
     private static void prefixAndPostFix()
