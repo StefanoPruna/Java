@@ -16,6 +16,7 @@ public class Inheritage {
         Cat pet = new Cat();
         pet.setName("Kitty");
         pet.setAge(5);
+        pet.setLives(7);
         //Cat petTwo = new Cat("Kitty", 5); it doesn't work, because Cat class is empty
         
         //or if we use the Superclass Animal, it will work
@@ -23,14 +24,17 @@ public class Inheritage {
         
         System.out.println(pet.toString());
         
-        //It'll work now, because I have added the constructors in the Cat class
-        Cat petTwo = new Cat("Yoda", 3);
+        //It'll work now, because I have added the constructors, getter, setter and the override toString in the Cat class
+        Cat petTwo = new Cat("Yoda", 3, 7);
         Dog petOne = new Dog("Obi", 3, "short hair");
-        petOne.type = "short hair";
+        //petOne.type = "short hair";
         
         System.out.println(petTwo.toString());
-        System.out.println(pet.toString());
         System.out.println(petOne.toString());
-        System.out.println(petOne.getName() + petOne.getAge() + petOne.getType());
+        //System.out.println(petOne.getName() + petOne.getAge() + petOne.getType());
+        
+        petOne.sleep();
+        Tiger petThree = new Tiger();
+        petThree.sleep();
     }
 }

@@ -5,13 +5,14 @@ package inheritage;
 public class Dog extends Animal
 {
 
-    protected String type;
+    private String type;
     
     public Dog() {
     }
 
     public Dog(String name, Integer age, String type) {
-        super(name, age);        
+        super(name, age);     
+        this.type = type;
     }    
 
     public String getType() {
@@ -22,8 +23,8 @@ public class Dog extends Animal
         this.type = type;
     }
 
-//    @Override
-//    public String toString() {
-//        return super.toString(); //To change body of generated methods, choose Tools | Templates.
-//    } 
+    @Override
+    public String toString() {
+        return "Dog{" + "name=" + name + ", age=" + getAge() + ", type=" + type + '}';
+    }
 }

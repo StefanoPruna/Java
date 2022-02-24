@@ -3,7 +3,9 @@ package inheritage;
 
 public class Animal 
 {
-    private String name;
+    //Setting as protected, all the extend of Animal, can use the String name
+    //To use the private Integer age, they have to use getAge()
+    protected String name;
     private Integer age;
 
     //empty constructor
@@ -32,6 +34,11 @@ public class Animal
         this.age = age;
     }  
 
+    public void sleep()
+    {
+        System.out.println(name + " is sleeping");
+    }
+    
     @Override
     public String toString() {
         return "Animal{" + "name=" + name + ", age=" + age + '}';
