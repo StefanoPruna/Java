@@ -3,8 +3,8 @@ package inheritage;
 
 public class Animal 
 {
-    //Setting as protected, all the extend of Animal, can use the String name
-    //To use the private Integer age, they have to use getAge()
+    //Setting as protected, all the extends of Animal, can use the String name
+    //To use the private Integer age, I have to use getAge()
     protected String name;
     private Integer age;
 
