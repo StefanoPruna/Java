@@ -11,7 +11,7 @@ public class Tutorial2Task4 {
         if (temperature.equals("F") || temperature.equals("f"))
         {
             String fahrenheit = JOptionPane.showInputDialog(new JFrame(),"Enter the temperature in Fahrenheit: ");
-            int celsius = (((Integer.valueOf(fahrenheit)-32) *5) / 9);
+            double celsius = (((Integer.valueOf(fahrenheit)-32) *5) / 9);
             JOptionPane.showMessageDialog(new JFrame(),"the Fahrenheit temperature in Celcius is: " + celsius);
         }
         else
