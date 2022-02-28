@@ -11,11 +11,11 @@ public class StefanoTutorial2 {
         Tutorial2Task2 questionTwo = new Tutorial2Task2();
         questionTwo.taskTwo();
         
-        Tutorial2Task3 questionThree = new Tutorial2Task3();
-        questionThree.taskThree();
-        
-        Tutorial2Task4 questionFour = new Tutorial2Task4();
-        questionFour.taskFour();
+//        Tutorial2Task3 questionThree = new Tutorial2Task3();
+//        questionThree.taskThree();
+//        
+//        Tutorial2Task4 questionFour = new Tutorial2Task4();
+//        questionFour.taskFour();
         
         System.exit(0);
     }

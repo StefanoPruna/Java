@@ -15,7 +15,7 @@ public class Main {
         Use the Override toString method
         */
         
-        //Tests; I can add values in one line,
+        //Tests for Task1; I can add values in one line,
         //because I have added the constructors, getter, setter and the override toString in the Bicycle and LandVehicle classes
         Vehicle carOne = new Vehicle("black", 200, 5, 4);
         LandVehicle jeep = new LandVehicle("Green", 180, 6, 4);
@@ -29,19 +29,5 @@ public class Main {
         //I only want to print the specific datatypes for this class
         StefanoTut3Task2 motorBike = new StefanoTut3Task2("Schooter", "Automatic");
         System.out.println(motorBike.toString());
-        
-        //TASK 3
-        Circle calculate = new Circle();  
-        
-        calculate.calculateDiameter();
-        calculate.calculateCircumference();
-        calculate.calculateArea();
-        
-        //TASK 4
-        Cylinder calculateCylinder = new Cylinder();
-        calculateCylinder.calculateArea();
-        
-        Sphere calculateSphere = new Sphere();
-        calculateSphere.calculateArea();
     }    
 }

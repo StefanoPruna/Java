@@ -15,12 +15,6 @@ public class StefanoTut3Task2 extends LandVehicle
         this.gearType = gearType;
     }
 
-//    public StefanoTut3Task2(String name, String gearType, String colour, Integer actualSpeed, Integer actualGear, Integer numberWheels) {
-//        super(colour, actualSpeed, actualGear, numberWheels);
-//        this.name = name;
-//        this.gearType = gearType;
-//    }
-
     public String getName() {
         return name;
     }

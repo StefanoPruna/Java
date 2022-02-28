@@ -4,9 +4,8 @@ package StefanoTut3;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-
-public class Sphere extends Circle 
-{    
+public class Tut3Task4Sphere extends Tutorial3Task3
+{
     @Override
     public void calculateArea() 
     {
