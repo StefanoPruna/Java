@@ -9,8 +9,8 @@ public class Tutorial3Task3
     //private Double pi = 3.14;
     String radius = JOptionPane.showInputDialog(new JFrame(),"Enter the radius of the cycle: ");
     private int diameter;
-    private int circumference;
-    protected int area;
+    private double circumference;
+    protected double area;
     
     public void calculateDiameter()
     {
@@ -20,13 +20,13 @@ public class Tutorial3Task3
     
     public void calculateCircumference()
     {
-        circumference = (int) ((2 * 3.14) * Integer.valueOf(radius));
+        circumference = (double) ((2 * 3.14) * Integer.valueOf(radius));
         //JOptionPane.showMessageDialog(new JFrame(), "The Circumference is : " + circumference);
     }
     
     public void calculateArea()
     {
-        area = (int) (3.14 * (Integer.valueOf(radius) * Integer.valueOf(radius)));
+        area = (double) (3.14 * (Integer.valueOf(radius) * Integer.valueOf(radius)));
         //JOptionPane.showMessageDialog(new JFrame(), "The Area is : " + area); 
     }   
 

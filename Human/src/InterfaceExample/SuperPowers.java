@@ -8,7 +8,7 @@ public interface SuperPowers
 {
     public void whatSuperPower();    
     
-    //HOW TO ASSIGN VARS IN THE INTERFACE
+    //HOW TO ASSIGN CONSTANTS VARIABLES IN THE INTERFACE
     public static final int ONE = 1;
     public static final String NAME = "Loske";
 }
