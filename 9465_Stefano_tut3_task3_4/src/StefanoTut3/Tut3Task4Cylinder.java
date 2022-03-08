@@ -12,7 +12,7 @@ public class Tut3Task4Cylinder extends Tutorial3Task3
     public void calculateArea() 
     {
         String height = JOptionPane.showInputDialog(new JFrame(),"Enter the height of the cylider: ");
-        int cylinder = (int) (3.14 * (Integer.valueOf(radius) * Integer.valueOf(radius))) + Integer.valueOf(height);
+        Double cylinder = (3.14 * radius * radius) + Integer.valueOf(height);
         JOptionPane.showMessageDialog(new JFrame(), "The Cylinder is : " + cylinder); 
     }        
 }

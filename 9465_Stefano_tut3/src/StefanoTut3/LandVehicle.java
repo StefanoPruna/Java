@@ -4,12 +4,19 @@ package StefanoTut3;
 //This class inherits, or extends to Vehicle class
 public class LandVehicle extends Vehicle
 {
-    public LandVehicle() {
+    protected Integer numberWheels;  
+    
+    public LandVehicle() 
+    {
     }
 
-    //super is referring to the superclass Vehicle
-    public LandVehicle(String colour, Integer actualSpeed, Integer actualGear, Integer numberWheels) {
-        super(colour, actualSpeed, actualGear, numberWheels);
+    public LandVehicle(Integer numberWheels) {
+        this.numberWheels = numberWheels;
+    }
+
+    public LandVehicle(Integer numberWheels, String colour, Integer actualSpeed, Integer actualGear) {
+        super(colour, actualSpeed, actualGear);
+        this.numberWheels = numberWheels;
     }
     
 }
