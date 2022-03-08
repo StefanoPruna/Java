@@ -17,10 +17,10 @@ public class Main {
         
         //Tests for Task1; I can add values in one line,
         //because I have added the constructors, getter, setter and the override toString in the Bicycle and LandVehicle classes
-        Vehicle carOne = new Vehicle("black", 200, 5, 4);
-        LandVehicle jeep = new LandVehicle("Green", 180, 6, 4);
-        Bicycle bike = new Bicycle("Aluminium", 3, 7, "Black and White", 40, 21, 2);
-        
+        Vehicle carOne = new Vehicle("black", 200, 5);
+        LandVehicle jeep = new LandVehicle(4, "green", 150, 6);
+        Bicycle bike = new Bicycle("Aluminium", 3, 7, 2, "Black and White", 50, 21);
+                
         System.out.println(carOne.toString());
         System.out.println(jeep.toString());
         System.out.println(bike.toString());      
