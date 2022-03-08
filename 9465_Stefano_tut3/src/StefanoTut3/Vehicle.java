@@ -10,16 +10,14 @@ public class Vehicle
     private String colour;
     private Integer actualSpeed;
     protected Integer actualGear;
-    protected Integer numberWheels;  
 
     public Vehicle() {
     }
 
-    public Vehicle(String colour, Integer actualSpeed, Integer actualGear, Integer numberWheels) {
+    public Vehicle(String colour, Integer actualSpeed, Integer actualGear) {
         this.colour = colour;
         this.actualSpeed = actualSpeed;
         this.actualGear = actualGear;
-        this.numberWheels = numberWheels;
     }
 
     public String getColour() {
@@ -46,17 +44,9 @@ public class Vehicle
         this.actualGear = actualGear;
     }
 
-    public Integer getNumberWheels() {
-        return numberWheels;
-    }
-
-    public void setNumberWheels(Integer numberWheels) {
-        this.numberWheels = numberWheels;
-    }
-
     @Override
     public String toString() {
-        return "Vehicle{" + "colour=" + colour + ", actualSpeed=" + actualSpeed + ", actualGear=" + actualGear + ", numberWheels=" + numberWheels + '}';
+        return "Vehicle{" + "colour=" + colour + ", actualSpeed=" + actualSpeed + ", actualGear=" + actualGear + '}';
     }
     
 }

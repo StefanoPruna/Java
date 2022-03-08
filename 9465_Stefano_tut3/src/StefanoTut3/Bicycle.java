@@ -2,7 +2,7 @@
 package StefanoTut3;
 
 //This class inherits, or extends to Vehicle class
-public class Bicycle extends Vehicle
+public class Bicycle extends LandVehicle
 {
     //These vars/datatypes are specifically for Bicycle class only
     private String frameMaterial;
@@ -15,13 +15,14 @@ public class Bicycle extends Vehicle
     /*super is referring to the superclass Vehicle
       With the Constructor, I can add the values in one line in the Main class
     */
-    public Bicycle(String frameMaterial, Integer numberCogsFront, Integer numberCogsBack, String colour, Integer actualSpeed, Integer actualGear, Integer numberWheels) {
-        super(colour, actualSpeed, actualGear, numberWheels);
+
+    public Bicycle(String frameMaterial, Integer numberCogsFront, Integer numberCogsBack, Integer numberWheels, String colour, Integer actualSpeed, Integer actualGear) {
+        super(numberWheels, colour, actualSpeed, actualGear);
         this.frameMaterial = frameMaterial;
         this.numberCogsFront = numberCogsFront;
         this.numberCogsBack = numberCogsBack;
-    }  
-
+    }
+    
     public String getFrameMaterial() {
         return frameMaterial;
     }
