@@ -52,22 +52,29 @@ public class SavingsAccount extends ATM implements Interest
     @Override
     public Float checkAmountWithdraw() 
     {
+        //Check if the test allows to use only the 20, 50 and 100 notes
         if (howMuchWithdraw == 20 || howMuchWithdraw == 50 || howMuchWithdraw == 100)
             principal -= howMuchWithdraw;
         else
             System.out.println("you have inserted the wrong value");
         
+        //add the deposit to the principal
         principal += deposit;
+        
+        //and return the balance
         return principal;         
     }
 
     @Override
     public Float calculateInterest() 
     {
+        //Interest calculation
         rate = 0.0155f;
         time = rate / 365;
         interest = principal * rate * time;
         balance = principal + interest;
+        
+        //and return the final balance with the withdraw, deposit and interest
         return balance;
     }
 
