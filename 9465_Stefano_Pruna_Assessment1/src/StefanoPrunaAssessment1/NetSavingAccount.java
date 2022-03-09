@@ -51,8 +51,22 @@ public class NetSavingAccount extends ATM implements Interest
     }
 
     @Override
-    public Float checkAmountWithdraw() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Float checkAmountWithdraw()
+    {
+        //Check if the test allows to use only the 20, 50 and 100 notes
+        if (howMuchWithdraw == 20 || howMuchWithdraw == 50 || howMuchWithdraw == 100)
+            principal -= howMuchWithdraw;
+        else
+        {
+            System.out.println("you have inserted the wrong value");
+            return principal;
+        }
+        
+        //add the deposit to the principal
+        principal += deposit;
+        
+        //and return the balance
+        return principal;  
     }
 
     @Override
@@ -60,13 +74,17 @@ public class NetSavingAccount extends ATM implements Interest
     {
         rate = 0.02f;
         time = 1/12f;
+        interest = principal * rate * time;
+        balance = principal + interest;
+        
+        //and return the final balance with the withdraw, deposit and interest
         return principal * rate * time;
     }
 
     @Override
     public String toString() {
-        return "ATM{" + "howMuchWithdraw=" + howMuchWithdraw + ", principal=" + principal + ", deposit=" + deposit + 
-                "Your interest is $" + calculateInterest() + '}';
+        return "ATM{" + "You have withdrew: $" + howMuchWithdraw + "\nYou have deposited: $" + deposit + "\nThe current balance is: " + checkAmountWithdraw() +
+                "\nYour interest is $" + calculateInterest() + "\nAnd your final balance is: $" + balance + '}';
     }
        
 }

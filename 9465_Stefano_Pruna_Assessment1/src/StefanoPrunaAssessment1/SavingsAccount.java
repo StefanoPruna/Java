@@ -56,7 +56,10 @@ public class SavingsAccount extends ATM implements Interest
         if (howMuchWithdraw == 20 || howMuchWithdraw == 50 || howMuchWithdraw == 100)
             principal -= howMuchWithdraw;
         else
+        {
             System.out.println("you have inserted the wrong value");
+            return principal;
+        }
         
         //add the deposit to the principal
         principal += deposit;
@@ -75,13 +78,13 @@ public class SavingsAccount extends ATM implements Interest
         balance = principal + interest;
         
         //and return the final balance with the withdraw, deposit and interest
-        return balance;
+        return principal * rate * time;
     }
 
     //I added the withdraw limit as the user can choose it in this account
     @Override
     public String toString() {
-        return "ATM{" + "howMuchWithdraw=" + howMuchWithdraw + ", WithdrawLimit=" + withdrawLimit + ", principal=" + principal + ", deposit=" + deposit + " " +
-                + checkAmountWithdraw() + " Your interest is $" + calculateInterest() + " and your balance is: $" + balance + '}';
+        return "ATM{" + "You have withdrew: $" + howMuchWithdraw + "\nThe withdraw limit is: $" + withdrawLimit + "\nYou have deposited: $" + deposit
+                + "\nThe current balance is: " + checkAmountWithdraw() + "\nYour interest is $" + calculateInterest() + "\nAnd your balance is: $" + balance + '}';
     }    
 }
