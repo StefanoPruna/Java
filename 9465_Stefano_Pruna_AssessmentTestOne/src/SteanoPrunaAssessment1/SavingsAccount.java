@@ -82,7 +82,8 @@ public class SavingsAccount extends ATM
 
     public void setLimit()
     {
-       //Check if user doesn't insert a number
+        //I was trying to check if the user wasn't insert an Integer, but couldn't make it work
+       //Check if user doesn't insert an integer
        //while (check)
       // {
            Scanner sc = new Scanner(System.in);
@@ -182,7 +183,7 @@ public class SavingsAccount extends ATM
                 System.out.println("You have not inserted a valid option, try again");
         }
         //If user choose No to withdraw, the loops will finish
-        //And checks if principal is higher than 0 and calculate the interest, otherwise it won't 
+        //And checks if principal is higher than 0 and calculate the interest, otherwise there isn't an interest to add
         if (principal > 0)
         {
             interest = principal * rate * time;

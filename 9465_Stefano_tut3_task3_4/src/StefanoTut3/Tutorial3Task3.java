@@ -10,25 +10,25 @@ public class Tutorial3Task3
     //String radius = JOptionPane.showInputDialog(new JFrame(),"Enter the radius of the cycle: ");
     //Radius is a property and we don't calculate it, but give it a value
     protected Float radius = 7.21f;
-    private Float diameter;
-    private double circumference;
-    protected double area;
+    
+//    private double circumference;
+//    protected double area;
     
     public void calculateDiameter()
     {
-        diameter = 2 * radius;
+        return 2 * radius;
         //JOptionPane.showMessageDialog(new JFrame(), "The Diameter is : " + diameter);        
     }
     
-    public void calculateCircumference()
+    public double calculateCircumference()
     {
-        circumference = (2 * 3.14) * radius;
+        return radius * (2 * 3.14);
         //JOptionPane.showMessageDialog(new JFrame(), "The Circumference is : " + circumference);
     }
     
-    public void calculateArea()
+    public double calculateArea()
     {
-        area = 3.14 * (radius * radius);
+        return 3.14 * radius * radius;
         //JOptionPane.showMessageDialog(new JFrame(), "The Area is : " + area); 
     }   
 

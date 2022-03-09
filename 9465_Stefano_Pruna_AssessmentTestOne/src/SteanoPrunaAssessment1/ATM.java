@@ -7,9 +7,8 @@ public abstract class ATM
     protected Boolean withdraw;
     protected Integer howMuchWithdrawing;
     protected String withdrawCheck;
-    //protected Float deposit;
     protected Float principal;
-    //Limit is set by the user
+    //Limit is set by the user in the Savings Account
     protected Integer withdrawLimit;
     public Float rate;
     protected Float interest;

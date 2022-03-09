@@ -159,7 +159,7 @@ public class NetSavingAccount extends ATM
                 System.out.println("You have not inserted a valid option, try again");
         }
         //If user choose No to withdraw, the loops will finish
-        //And checks if principal is higher than 0 and calculate the interest, otherwise it won't 
+        //And checks if principal is higher than 0 and calculate the interest, otherwise there isn't an interest to add 
         if (principal > 0)
         {
             interest = principal * rate * time;
