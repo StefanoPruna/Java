@@ -14,10 +14,10 @@ public class Main {
 //        NetSavingAccount netSaving = new NetSavingAccount();        
 //        netSaving.calculateInterest();    
         
-        FixedAccount newFixAcc = new FixedAccount();
+        FixedAccountTest newFixAcc = new FixedAccountTest();
         newFixAcc.calculateInterest();
         
-        ChequeAccount newCheque = new ChequeAccount();
+        ChequeAccountTest newCheque = new ChequeAccountTest();
         newCheque.calculateInterest();
     }    
 }

@@ -1,7 +1,7 @@
 
 package SteanoPrunaAssessment1;
 
-public abstract class ATM 
+public abstract class ATMTest 
 {
     //Data types and method that will be extended to the other classes
     protected Boolean withdraw;

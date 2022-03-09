@@ -3,13 +3,13 @@ package SteanoPrunaAssessment1;
 
 import java.util.*;
 
-public class ChequeAccount extends ATM
+public class ChequeAccountTest extends ATMTest
 {
 
     //There is not limit to withdraw and interest
     //It will only ask how much to withdraw
     
-    public ChequeAccount() {
+    public ChequeAccountTest() {
     }
 
     @Override

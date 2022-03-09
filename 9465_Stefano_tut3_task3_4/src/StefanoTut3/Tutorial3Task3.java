@@ -11,11 +11,13 @@ public class Tutorial3Task3
     //Radius is a property and we don't calculate it, but give it a value
     protected Float radius = 7.21f;
     
+    //I don't need to create the variable, but the method will be enough
 //    private double circumference;
 //    protected double area;
     
-    public void calculateDiameter()
+    public float calculateDiameter()
     {
+        //diameter = 2 * radius; is wrong, I don't need to store the data in here
         return 2 * radius;
         //JOptionPane.showMessageDialog(new JFrame(), "The Diameter is : " + diameter);        
     }

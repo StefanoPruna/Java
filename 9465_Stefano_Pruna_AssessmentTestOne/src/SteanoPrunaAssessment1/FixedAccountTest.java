@@ -4,7 +4,7 @@ package SteanoPrunaAssessment1;
 import java.util.*;
 
 
-public class FixedAccount extends ATM
+public class FixedAccountTest extends ATMTest
 {
     //The fixed interest is the highest, based on 3 months period
     //Therefore time is 1/4
@@ -13,8 +13,8 @@ public class FixedAccount extends ATM
     //local data types and we start with the assumption that the user hasn't withdraw yet
     private Boolean earlyWithdraw = false;
     
-    //Inherited the data types/variable and method from ATM 
-    public FixedAccount() {
+    //Inherited the data types/variable and method from ATMTest 
+    public FixedAccountTest() {
     }
 
     

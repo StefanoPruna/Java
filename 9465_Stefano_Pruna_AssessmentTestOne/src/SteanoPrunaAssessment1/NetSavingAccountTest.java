@@ -3,15 +3,15 @@ package SteanoPrunaAssessment1;
 
 import java.util.*;
 
-public class NetSavingAccount extends ATM
+public class NetSavingAccountTest extends ATMTest
 {
 
     //Monthly interest is higher than the daily ones
     //There is a pre-set limit to withdraw
     //Time is 1/12
-    //Inherited the data types/variable and method from ATM 
+    //Inherited the data types/variable and method from ATMTest 
     
-    public NetSavingAccount() {
+    public NetSavingAccountTest() {
     }
 
     public Boolean getWithdraw() {

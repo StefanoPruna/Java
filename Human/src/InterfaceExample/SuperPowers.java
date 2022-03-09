@@ -9,6 +9,6 @@ public interface SuperPowers
     public void whatSuperPower();    
     
     //HOW TO ASSIGN CONSTANTS VARIABLES IN THE INTERFACE
-    public static final int ONE = 1;
+    public int ONE;
     public static final String NAME = "Loske";
 }

@@ -26,11 +26,13 @@ public class Inheritage {
         
         //It'll work now, because I have added the constructors, getter, setter and the override toString in the Cat class
         Cat petTwo = new Cat("Yoda", 3, 7);
+        Cat petthree = new Cat("Yoda", 63, 67);
         Dog petOne = new Dog("Obi", 3, "short hair");
         //petOne.type = "short hair";
         
         System.out.println(petTwo.toString());
         System.out.println(petOne.toString());
+        System.out.println(petthree.toString());
         //System.out.println(petOne.getName() + petOne.getAge() + petOne.getType());
         
         petOne.sleep();

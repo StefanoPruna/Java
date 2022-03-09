@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package StefanoPrunaAssessment1;
 
-/**
- *
- * @author makem
- */
+
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+    public static void main(String[] args)
+    {
+        SavingsAccount newSavings = new SavingsAccount(50, 500, 5000f, 100);
+        SavingsAccount newSavings2 = new SavingsAccount(30, 500, 5000f, 100);
+        
+        System.out.println(newSavings.toString());
+        
+        NetSavingAccount newNetAccount = new NetSavingAccount(50, 1000, 1000f, 50);
+        System.out.println(newNetAccount.toString());
+        System.out.println("The withdraw limit for the Net Saving account is: $" + newNetAccount.getWithdrawLimit());
+    }    
 }

@@ -3,16 +3,16 @@ package SteanoPrunaAssessment1;
 
 import java.util.*;
 
-public class SavingsAccount extends ATM
+public class SavingsAccountTest extends ATMTest
 {
     //Daily time is rate / 365
     //Interest = principal * rate * time   
-    //Inherited the data types/variable and method from ATM 
+    //Inherited the data types/variable and method from ATMTest 
     
     //this boolean is needed for the loop in the setlimit method
     //private Boolean check = true;
     
-    public SavingsAccount()
+    public SavingsAccountTest()
     {
     }  
 
@@ -108,10 +108,10 @@ public class SavingsAccount extends ATM
     {
         //assign values to start the daily calculation
         withdraw = true;
+        
         principal = 2000f;
         rate = 0.015f;
-        interest = 0f;
-        
+        interest = 0f;        
         time = rate / 365;
                 
         //Loops until the user wants to withdraw money
