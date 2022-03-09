@@ -7,48 +7,51 @@ import javax.swing.JOptionPane;
 
 public class Square implements Shape2D
 {
-    protected String side;
-    protected Integer size;
-    protected Double diameter;
-    protected Integer circumference;
+    protected Float side;
 
     public Square() {
     }
 
-    public Square(String side, Integer size, Double diameter, Integer circumference) {
+    public Square(Float side) {
         this.side = side;
-        this.size = size;
-        this.diameter = diameter;
-        this.circumference = circumference;
+    }
+
+    public Float getSide() {
+        return side;
+    }
+
+    public void setSide(Float side) {
+        this.side = side;
     }
 
     @Override
-    public void calculateCircumference() 
-    {
-        side = JOptionPane.showInputDialog(new JFrame(),"Enter the side of the square: ");   
-        circumference = Integer.valueOf(side) * 4;
+    public Float calculateCircumference() 
+    {          
+        return side * 4;
     }    
     
     @Override
-    public void calculateDiameter() 
+    public Float calculateDiameter() 
     {
-        diameter = Integer.valueOf(side) * 1.4;
-        JOptionPane.showMessageDialog(new JFrame(),"the diameter of the Square is: " + diameter);
+        return side * 1.4f;
     }
 
     @Override
-    public void calculateArea() 
+    public Float calculateArea() 
     {        
-        size = Integer.valueOf(side) * Integer.valueOf(side);
-                
-        JOptionPane.showMessageDialog(new JFrame(),"the size of the Square is: " + size);
+        return side * side;
     }
 
     @Override
-    public void showCharacteristcs() 
-    {        
-        calculateCircumference();
-        calculateDiameter();
-        calculateArea();
+    public Float showCharacteristcs() 
+    {     
+        return calculateArea();
     }  
+
+    @Override
+    public String toString() 
+    {
+        return "Square{" + "side=" + side + "The Diameter of the Circle is: " + calculateDiameter() + "\nThe circumference is: " + calculateCircumference() +
+                "\nAnd the area of the Square is: " + showCharacteristcs() + '}';
+    }
 }

@@ -14,22 +14,16 @@ public class Sphere extends Circle implements Shape3D
     public Sphere() {
     }    
 
-    public Sphere(double volume) {
-        this.volume = volume;        
-    }
-
-    public Sphere(double volume, Double area, int diameter, double circumference) {
-        super(area, diameter, circumference);
-        this.volume = volume;
+    @Override
+    public Float calculateVolume() 
+    {        
+        return ((radius * radius * radius) * 4 * pi) / 3;
     }
 
     @Override
-    public void calculateVolume() 
+    public String toString() 
     {
-        //radius = JOptionPane.showInputDialog(new JFrame(),"Enter the radius of the Sphere: ");
-        volume = ((Integer.valueOf(radius) * Integer.valueOf(radius) * Integer.valueOf(radius)) * 4 * 3.14) / 3;
-        
-        JOptionPane.showMessageDialog(new JFrame(), "The Volume of the Sphere is : " + volume);
+        return "Circle{" + "The volume of the Sphere is " + calculateVolume() + '}';
     }
         
 }

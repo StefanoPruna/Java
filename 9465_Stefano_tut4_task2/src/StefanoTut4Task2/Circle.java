@@ -7,53 +7,56 @@ import javax.swing.JOptionPane;
 
 public class Circle implements Shape2D
 {
-    private Double pi = 3.14;
-    protected Double area;
-    private int diameter;
-    private Double circumference;
-    protected Double volume;
+    protected Float radius = 7.21f;
+    protected Float pi = 3.14f; 
     
-    protected String radius = JOptionPane.showInputDialog(new JFrame(),"Enter the radius of the cycle: ");
-
     public Circle() {
     }
 
-    public Circle(Double area, int diameter, Double circumference) {
-        this.area = area;
-        this.diameter = diameter;
-        this.circumference = circumference;
+    public Float getRadius() {
+        return radius;
+    }
+
+    public void setRadius(Float radius) {
+        this.radius = radius;
+    }
+
+    public Float getPi() {
+        return pi;
+    }
+
+    public void setPi(Float pi) {
+        this.pi = pi;
     }
 
     @Override
-    public void calculateDiameter() 
+    public Float calculateDiameter() 
     {
-        diameter = 2 * (Integer.valueOf(radius));
-        JOptionPane.showMessageDialog(new JFrame(), "The Diameter is : " + diameter);
-    }
-
-    /**
-     *
-     */
-    @Override
-    public void calculateCircumference() 
-    {
-        circumference = (2 * 3.14) * Integer.valueOf(radius);
-        JOptionPane.showMessageDialog(new JFrame(), "The Circumference is : " + circumference);
+        return 2 * radius;
+        
     }
 
     @Override
-    public void calculateArea() 
+    public Float calculateCircumference() 
     {
-        area = (3.14 * (Integer.valueOf(radius) * Integer.valueOf(radius)));
-        JOptionPane.showMessageDialog(new JFrame(), "The Area is : " + area); 
+        return (2 * pi) * radius;
     }
 
     @Override
-    public void showCharacteristcs() 
+    public Float calculateArea() 
     {
-        calculateDiameter();
-        calculateCircumference();
-        calculateArea();
-    }     
-    
+        return (pi * radius) * radius;
+    }
+
+    @Override
+    public Float showCharacteristcs() 
+    {
+        return calculateArea();
+    }  
+
+    @Override
+    public String toString() {
+        return "Circle{" + "The Diameter of the Circle is: " + calculateDiameter() + "\nThe circumference is: " + calculateCircumference() + 
+                "\nThe area of the Circle is " + showCharacteristcs() + '}';
+    }
 }

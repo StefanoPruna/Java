@@ -43,7 +43,5 @@ public class Square extends Poly
     public String toString() 
     {
         return "Poly{" + "name=" + name + ", colour=" + colour + ", size=" + size + ". The area of the square is " + calculateArea() + '}';
-    }
-    
-    
+    }    
 }

@@ -4,8 +4,8 @@ package StefanoTut4Task2;
 
 public interface Shape2D 
 {
-    public void calculateDiameter();
-    public void calculateCircumference();
-    public void calculateArea();
-    public void showCharacteristcs();
+    public Float calculateDiameter();
+    public Float calculateCircumference();
+    public Float calculateArea();
+    public Float showCharacteristcs();
 }

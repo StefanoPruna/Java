@@ -6,18 +6,18 @@ public class Main {
     public static void main(String[] args)
     {
         Sphere newSphere = new Sphere();
-        newSphere.calculateVolume();
-        
-        Cylinder newCylinder = new Cylinder();
-        newCylinder.calculateVolume();  
-        
+        System.out.println(newSphere.toString());
+
+        Cylinder newCylinder = new Cylinder(50f);
+        System.out.println(newCylinder.toString());
+
         Circle newCircle = new Circle();
-        newCircle.showCharacteristcs();
-        
-        Square newSquare = new Square();
-        newSquare.showCharacteristcs();
-        
-        Rectangle newRectangle = new Rectangle();
-        newRectangle.showCharacteristcs();      
+        System.out.println(newCircle.toString());
+
+        Square newSquare = new Square(60f);
+        System.out.println(newSquare.toString());
+
+        Rectangle newRectangle = new Rectangle(50f, 30f);
+        System.out.println(newRectangle.toString());  
     }    
 }

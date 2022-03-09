@@ -5,43 +5,67 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Rectangle extends Square implements Shape2D
-{    
-    private String secondSide;
+{   
+    private Float secondSide;
+    private Float circumference;
+    
     public Rectangle() {
     }
 
-    public Rectangle(String side, Integer size, Double diameter, Integer circumference) {
-        super(side, size, diameter, circumference);
+    public Rectangle(Float secondSide) {
+        this.secondSide = secondSide;
     }
 
+    public Rectangle(Float secondSide, Float side) {
+        super(side);
+        this.secondSide = secondSide;
+    }
+
+    public Float getSecondSide() {
+        return secondSide;
+    }
+
+    public void setSecondSide(Float secondSide) {
+        this.secondSide = secondSide;
+    }
+
+    public Float getCircumference() {
+        return circumference;
+    }
+
+    public void setCircumference(Float circumference) {
+        this.circumference = circumference;
+    }
+
+
     @Override
-    public void calculateCircumference() 
+    public Float calculateCircumference() 
     {
-        side = JOptionPane.showInputDialog(new JFrame(),"Enter the side of the rectangular: ");
-        secondSide = JOptionPane.showInputDialog(new JFrame(),"Enter the second side of the rectangular: ");
-        circumference = 2 * (Integer.valueOf(side) + Integer.valueOf(secondSide));
+        circumference = 2 * (side + secondSide);
+        return circumference;
     }
     
     @Override
-    public void calculateDiameter() 
+    public Float calculateDiameter() 
     {
-        diameter = Integer.valueOf(circumference) / 3.14;
-        JOptionPane.showMessageDialog(new JFrame(),"the diameter of the rectangular is: " + diameter);
+        return circumference / 3.14f;
     }
     
     @Override
-    public void calculateArea() 
+    public Float calculateArea() 
     {
-        size = Integer.valueOf(side) * Integer.valueOf(secondSide);
-                
-        JOptionPane.showMessageDialog(new JFrame(),"the size of the rectangular is: " + size);
+        return side * secondSide;
     }
          
     @Override
-    public void showCharacteristcs() 
+    public Float showCharacteristcs() 
     {
-        calculateCircumference();     
-        calculateDiameter();
-        calculateArea();
-    }    
+        return calculateArea();
+    }  
+
+    @Override
+    public String toString() {
+        return "Rectangle{" + "side=" + side + ", secondSide=" + secondSide + "\nThe circumference is: " + calculateCircumference()+ "\nThe Diameter of the Rectangle is" +
+                calculateDiameter() + "\nAnd the Area of the Rectangle is: " + showCharacteristcs() + '}';
+    }
 }
