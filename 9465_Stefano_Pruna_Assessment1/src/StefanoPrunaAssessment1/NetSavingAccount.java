@@ -14,7 +14,7 @@ public class NetSavingAccount extends ATM implements Interest
         
     }
 
-    public NetSavingAccount(Integer howMuchWithdraw, Integer withdrawLimit, Float principal, Integer deposit) {
+    public NetSavingAccount(Float howMuchWithdraw, Integer withdrawLimit, Float principal, Integer deposit) {
         super(howMuchWithdraw, withdrawLimit, principal, deposit);
     }   
 
@@ -55,18 +55,17 @@ public class NetSavingAccount extends ATM implements Interest
     {
         //Check if the test allows to use only the 20, 50 and 100 notes
         if (howMuchWithdraw == 20 || howMuchWithdraw == 50 || howMuchWithdraw == 100)
-            principal -= howMuchWithdraw;
+            principal -= howMuchWithdraw - deposit;//add the deposit and reduce the cash withdraw to the principal
         else
         {
             System.out.println("you have inserted the wrong value");
-            return principal;
+            //add the deposit to the principal
+            principal += deposit;
+            return 0f;
         }
-        
-        //add the deposit to the principal
-        principal += deposit;
-        
+               
         //and return the balance
-        return principal;  
+        return howMuchWithdraw;  
     }
 
     @Override
@@ -83,7 +82,7 @@ public class NetSavingAccount extends ATM implements Interest
 
     @Override
     public String toString() {
-        return "ATM{" + "You have withdrew: $" + howMuchWithdraw + "\nYou have deposited: $" + deposit + "\nThe current balance is: " + checkAmountWithdraw() +
+        return "ATM{" + "You have withdrew: $" + checkAmountWithdraw() + "\nYou have deposited: $" + deposit + "\nThe current balance is: " + principal +
                 "\nYour interest is $" + calculateInterest() + "\nAnd your final balance is: $" + balance + '}';
     }
        

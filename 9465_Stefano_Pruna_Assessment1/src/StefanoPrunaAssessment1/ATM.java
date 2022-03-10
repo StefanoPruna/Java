@@ -5,7 +5,7 @@ package StefanoPrunaAssessment1;
 public abstract class ATM 
 {
     //Data types and method that will be extended to the other classes
-    public Integer howMuchWithdraw;    
+    public Float howMuchWithdraw;    
     protected Integer withdrawLimit;
     protected Float rate;
     protected Float interest;
@@ -14,7 +14,7 @@ public abstract class ATM
     protected Integer deposit;
     protected Float balance;
 
-    public ATM(Integer howMuchWithdraw, Integer withdrawLimit, Float principal, Integer deposit) {
+    public ATM(Float howMuchWithdraw, Integer withdrawLimit, Float principal, Integer deposit) {
         this.howMuchWithdraw = howMuchWithdraw;
         this.withdrawLimit = withdrawLimit;
         this.principal = principal;
@@ -24,11 +24,11 @@ public abstract class ATM
     public ATM() {
     }
 
-    public Integer getHowMuchWithdraw() {
+    public Float getHowMuchWithdraw() {
         return howMuchWithdraw;
     }
 
-    public void setHowMuchWithdraw(Integer howMuchWithdraw) {
+    public void setHowMuchWithdraw(Float howMuchWithdraw) {
         this.howMuchWithdraw = howMuchWithdraw;
     }
 
