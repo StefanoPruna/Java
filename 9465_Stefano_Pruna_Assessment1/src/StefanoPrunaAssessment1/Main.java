@@ -30,5 +30,11 @@ public class Main {
         System.out.println(newCheque.toString());
         ChequeAccount newCheque2 = new ChequeAccount(13f, 90, 500f, 1000);
         System.out.println(newCheque2.toString());
+        
+        //Tests for the Fixed Account; it doesn't have a limit to withdraw, but if withdraw, it shouldn't count the interest
+        FixedAccount newFixed = new FixedAccount(50f, 0, 500f, 30);
+        System.out.println(newFixed.toString());
+        FixedAccount newFixed2 = new FixedAccount(0f, 0, 1000f, 100);
+        System.out.println(newFixed2.toString());
     }    
 }

@@ -27,17 +27,18 @@ public class ChequeAccount extends ATM
             System.out.println("you have inserted the wrong value");
             //add the deposit to the principal
             principal += deposit;
+            //return 0, because it didn't withdraw anything
             return 0f;
         }
                 
-        //and return the balance
+        //and return how much withdraw between 20, 50 and 100
         return howMuchWithdraw;        
     }
 
     @Override
     public String toString()
     {
-        return "ATM{" + "You have withdrew: $" + checkAmountWithdraw() + "\nYou have deposited: $" + deposit
+        return "ATM{" + "You have withdrawn: $" + checkAmountWithdraw() + "\nYou have deposited: $" + deposit
                 + "\nThe current balance is: " + principal + '}';
     }
     

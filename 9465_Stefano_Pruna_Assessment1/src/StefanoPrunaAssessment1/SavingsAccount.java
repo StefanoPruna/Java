@@ -49,6 +49,14 @@ public class SavingsAccount extends ATM implements Interest
         this.time = time;
     }
 
+    public Float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Float balance) {
+        this.balance = balance;
+    }
+
     @Override
     public Float checkAmountWithdraw() 
     {
@@ -60,6 +68,7 @@ public class SavingsAccount extends ATM implements Interest
             System.out.println("you have inserted the wrong value");
             //add the deposit to the principal
             principal += deposit;
+            //return 0, because it didn't withdraw anything
             return 0f;
         }
                   
@@ -76,14 +85,13 @@ public class SavingsAccount extends ATM implements Interest
         interest = principal * rate * time;
         balance = principal + interest;
         
-        //and return the final balance with the withdraw, deposit and interest
-        return principal * rate * time;
+        return interest;
     }
 
     //I added the withdraw limit as the user can choose it in this account
     @Override
     public String toString() {
-        return "ATM{" + "You have withdrew: $" + checkAmountWithdraw() + "\nThe withdraw limit is: $" + withdrawLimit + "\nYou have deposited: $" + deposit
+        return "ATM{" + "You have withdrawn: $" + checkAmountWithdraw() + "\nThe withdraw limit is: $" + withdrawLimit + "\nYou have deposited: $" + deposit
                 + "\nThe current balance is: " + principal + "\nYour interest is $" + calculateInterest() + "\nAnd your balance is: $" + balance + '}';
     }    
 }
