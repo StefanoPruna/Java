@@ -5,14 +5,17 @@ package StefanoPrunaAssessment1;
 public abstract class ATM 
 {
     //Data types and method that will be extended to the other classes
-    public Float howMuchWithdraw;    
-    protected Integer withdrawLimit;
-    protected Float rate;
-    protected Float interest;
-    protected Float time; 
+    //protected data types that all classes are using them:
+    protected Float howMuchWithdraw;    
     protected Float principal;
     protected Integer deposit;
     protected Float balance;
+    
+    //private data types that not all classes are using these
+    private Integer withdrawLimit;
+    private Float rate;
+    private Float interest;
+    private Float time; 
 
     public ATM(Float howMuchWithdraw, Integer withdrawLimit, Float principal, Integer deposit) {
         this.howMuchWithdraw = howMuchWithdraw;
@@ -20,8 +23,40 @@ public abstract class ATM
         this.principal = principal;
         this.deposit = deposit;
     }
-
+    
     public ATM() {
+    }
+
+    public Float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Float balance) {
+        this.balance = balance;
+    }
+
+    public Float getRate() {
+        return rate;
+    }
+
+    public void setRate(Float rate) {
+        this.rate = rate;
+    }
+
+    public Float getInterest() {
+        return interest;
+    }
+
+    public void setInterest(Float interest) {
+        this.interest = interest;
+    }
+
+    public Float getTime() {
+        return time;
+    }
+
+    public void setTime(Float time) {
+        this.time = time;
     }
 
     public Float getHowMuchWithdraw() {

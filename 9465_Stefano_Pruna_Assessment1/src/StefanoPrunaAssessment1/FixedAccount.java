@@ -22,36 +22,20 @@ public class FixedAccount extends ATM implements Interest
         this.earlyWithdraw = earlyWithdraw;
     }
 
-    public Float getRate() {
-        return rate;
-    }
-
+    //I need to override these, because they are private
+    @Override
     public void setRate(Float rate) {
-        this.rate = rate;
+        super.setRate(rate); 
     }
 
-    public Float getInterest() {
-        return interest;
-    }
-
-    public void setInterest(Float interest) {
-        this.interest = interest;
-    }
-
-    public Float getTime() {
-        return time;
-    }
-
+    @Override
     public void setTime(Float time) {
-        this.time = time;
+        super.setTime(time); 
     }
 
-    public Float getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Float balance) {
-        this.balance = balance;
+    @Override
+    public void setInterest(Float interest) {
+        super.setInterest(interest); 
     }
 
     @Override
@@ -60,8 +44,16 @@ public class FixedAccount extends ATM implements Interest
         //Check if the test allows to use only the 20, 50 and 100 notes
         if (howMuchWithdraw == 20 || howMuchWithdraw == 50 || howMuchWithdraw == 100)
         {
-            
-            principal -= howMuchWithdraw - deposit;//add the deposit and reduce the cash withdraw to the principal
+            earlyWithdraw = true;
+            principal -= howMuchWithdraw;
+            //Check if there is enough balance to withdraw
+            if(principal < 0)
+            {
+                System.out.println("You don't have enough money in your balace: $" + principal);
+                principal += howMuchWithdraw + deposit;
+                return 0f;
+            }
+            principal -= howMuchWithdraw;//add the deposit and reduce the cash withdraw to the principal
         }
         else if (howMuchWithdraw == 0)
             System.out.println("You didn't withraw, thus you will have the interest in your final balance");
@@ -73,7 +65,9 @@ public class FixedAccount extends ATM implements Interest
             //return 0, because it didn't withdraw anything
             return 0f;
         }
-                
+          
+        //for this class, we add the deposit now, otherwise it won't calculate it if there is an interest
+        principal += deposit;
         //and return how much withdraw between 20, 50 and 100
         return howMuchWithdraw;   
     }
@@ -81,22 +75,25 @@ public class FixedAccount extends ATM implements Interest
     @Override
     public Float calculateInterest() 
     {
-        if (howMuchWithdraw > 0)
+        if (earlyWithdraw)
         {
             //because they try to withdraw, there wont' be an interest
-            earlyWithdraw = true;
             System.out.println("You have withdrawn before the contract period, therefore you won't have the interest for this period");            
             return 0f;
         }
         
         //if there is no withdrawn, add the interest calculate as 3 months contract period
-        rate = 0.035f;
-        time = 1/4f;
-        interest = principal * rate * time;
+//        rate = 0.035f;
+//        time = 1/4f;
+//        interest = principal * rate * time;
+        setRate(0.035f);
+        setTime(1/4f);
+        setInterest(principal * getRate() * getTime());
+        balance = principal + getInterest();
         //I cannot use balance here, but principal, otherwise it won't add the interest
-        principal = principal + interest;             
+        principal = principal + getInterest();             
         
-        return interest;
+        return getInterest();
     }
 
     @Override

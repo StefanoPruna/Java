@@ -7,7 +7,7 @@ public class ChequeAccount extends ATM
     public ChequeAccount(Float howMuchWithdraw, Integer withdrawLimit, Float principal, Integer deposit) {
         super(howMuchWithdraw, withdrawLimit, principal, deposit);
     }
-
+    
     public Float getBalance() {
         return balance;
     }
@@ -21,7 +21,16 @@ public class ChequeAccount extends ATM
     {
         //Check if the test allows to use only the 20, 50 and 100 notes
         if (howMuchWithdraw == 20 || howMuchWithdraw == 50 || howMuchWithdraw == 100)
-            principal -= howMuchWithdraw - deposit;//add the deposit and reduce the cash withdraw to the principal
+        {
+            principal -= howMuchWithdraw;
+            //Check if there is enough balance to withdraw
+            if(principal < 0)
+            {
+                System.out.println("You don't have enough money in your balace: $" + principal);
+                principal += howMuchWithdraw + deposit;
+                return 0f;
+            }
+        }
         else
         {
             System.out.println("you have inserted the wrong value");
