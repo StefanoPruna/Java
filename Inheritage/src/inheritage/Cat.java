@@ -5,7 +5,7 @@ package inheritage;
 public class Cat extends Animal
 {
     private Integer lives;
-    private String yo = "old";
+    //private String yo = "old";
     
         //this means I don't have to create anything, because
         //it's already been initiliaze in Animal class, 
@@ -31,6 +31,6 @@ public class Cat extends Animal
 
     @Override
     public String toString() {//name now is protected, while age is still private in Animal
-        return "Cat{" + "name=" + ("mr") + ", age=" + getAge() + ", lives=" + (lives+3)  + '}';
+        return "Cat{" + "name=" + name + ", age=" + getAge() + ", lives=" + (lives+3)  + '}';
     }
 }

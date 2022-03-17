@@ -24,6 +24,13 @@ public class Dog extends Animal
     }
 
     @Override
+    public void sleep() {
+        System.out.println("The dog named " + name + " is not sleeping");
+    }
+    
+    
+
+    @Override
     public String toString() {//age is private, so that's why I have to use getAge
         return "Dog{" + "name=" + name + ", age=" + getAge() + ", type=" + type + '}';
     }
