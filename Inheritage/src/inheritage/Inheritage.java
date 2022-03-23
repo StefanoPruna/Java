@@ -91,5 +91,11 @@ public class Inheritage {
 //        List<Integer> age = new ArrayList<>();
 //        age.add(10);
 //        age.add(20); 
+        
+        List<Integer> numbers = new ArrayList();
+        numbers.add(1);
+        numbers.add(2);
+        System.out.println(numbers.get(0) + numbers.get(1));
+       
     }
 }
