@@ -1,11 +1,27 @@
 
 package StefanoPrunaAssessment1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Main {
 
     public static void main(String[] args)
     {
+        //for assignment 2:
+        //1.Create a string list
+//        List<String> digitNumbers = new ArrayList();
+
+        //2. When I create the button event, add:
+        //resultLabel.setText(resultLabel.getText().concat("0"));
+        //digitNumbers.add(resultLabel.getText());
+        
+        //3. then in another var, save the last value
+        //int test = Integer.valueOf(digitNumbers.get(digitNumbers.size() - 1));
+        
+        //4. then use the var test to check the data
+        
         //Tests for the savings account
         //Check if user withdraw more than the limit
         SavingsAccount newSavings = new SavingsAccount(100f, 50, 5000f, 100);

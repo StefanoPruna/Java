@@ -23,6 +23,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import BusinessLogic.Calculate;
+import java.util.HashSet;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import oracle.jrockit.jfr.events.Bits;
 
 
 public class Main extends Application{
@@ -38,12 +42,13 @@ public class Main extends Application{
         //A Calculate class for the result to use for every buttons
         //It's not ideal, but I couldn't find a better way at the moment
         //I still cannot manage the numbers with the .
-        //I still cannot manage more than 2 numbers calculation and only single digit number
+        //I still cannot manage more than 2 numbers calculation properly and only single digit numbers
         //Good to come back later to improve the code when I have learnt more skills in Java or programming
         Calculate calculate = new Calculate();
-        
-        GridPane gridpane = new GridPane();
 
+        //Create the Scene
+        BorderPane borderPane = new BorderPane();
+        
         //Create the inner grid
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
@@ -54,7 +59,7 @@ public class Main extends Application{
         List<Float> numbers = new ArrayList();
         List<String> signLabel = new ArrayList();
         Label resultLabel = new Label();
-
+        resultLabel.setFont(new Font(25));        
         
         //Creating the buttons; when click on the button, the number will be added to the List
         Button zeroButton = new Button(String.valueOf(0));
@@ -67,7 +72,6 @@ public class Main extends Application{
                 //Here we code an event, what the button will do when getting clicked
                 resultLabel.setText(resultLabel.getText().concat("0"));
                 numbers.add(0f);
-                System.out.println(numbers);
             }
         });
         
@@ -78,13 +82,11 @@ public class Main extends Application{
             @Override
             public void handle(ActionEvent t) 
             { 
-                    resultLabel.setText(resultLabel.getText().concat("1"));          
-                    numbers.add(1f);
-                    System.out.println(numbers);
-                
+                resultLabel.setText(resultLabel.getText().concat("1"));  
+                numbers.add(1f);
             }
         });
-        
+     
         Button twoButton = new Button(String.valueOf(2));
         twoButton.setBorder(new Border(new BorderStroke(Color.GREY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
         twoButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -93,8 +95,8 @@ public class Main extends Application{
             public void handle(ActionEvent t) 
             {
                 resultLabel.setText(resultLabel.getText().concat("2"));
-                numbers.add(2f);
-                System.out.println(numbers);               
+                //numbers.add(resultLabel.getText());
+                numbers.add(2f);            
             }
         });
         
@@ -106,8 +108,8 @@ public class Main extends Application{
             public void handle(ActionEvent t) 
             {
                 resultLabel.setText(resultLabel.getText().concat("3"));
-                numbers.add(3f);
-                System.out.println(numbers);               
+                //numbers.add(resultLabel.getText());
+                numbers.add(3f);           
             }
         });
         
@@ -119,8 +121,7 @@ public class Main extends Application{
             public void handle(ActionEvent t) 
             {
                 resultLabel.setText(resultLabel.getText().concat("4"));
-                numbers.add(4f);
-                System.out.println(numbers);               
+                numbers.add(4f);           
             }
         });
         
@@ -132,8 +133,7 @@ public class Main extends Application{
             public void handle(ActionEvent t) 
             {
                 resultLabel.setText(resultLabel.getText().concat("5"));
-                numbers.add(5f);
-                System.out.println(numbers);               
+                numbers.add(5f);           
             }
         });
         
@@ -145,8 +145,7 @@ public class Main extends Application{
             public void handle(ActionEvent t) 
             {
                 resultLabel.setText(resultLabel.getText().concat("6"));
-                numbers.add(6f);
-                System.out.println(numbers);               
+                numbers.add(6f);           
             }
         });
         
@@ -158,8 +157,7 @@ public class Main extends Application{
             public void handle(ActionEvent t) 
             {
                 resultLabel.setText(resultLabel.getText().concat("7"));
-                numbers.add(7f);
-                System.out.println(numbers);               
+                numbers.add(7f);            
             }
         });
         
@@ -171,8 +169,7 @@ public class Main extends Application{
             public void handle(ActionEvent t) 
             {
                 resultLabel.setText(resultLabel.getText().concat("8"));
-                numbers.add(8f);
-                System.out.println(numbers);               
+                numbers.add(8f);           
             }
         });
         
@@ -184,8 +181,7 @@ public class Main extends Application{
             public void handle(ActionEvent t) 
             {
                 resultLabel.setText(resultLabel.getText().concat("9"));
-                numbers.add(9f);
-                System.out.println(numbers);               
+                numbers.add(9f);            
             }
         });
         
@@ -199,7 +195,7 @@ public class Main extends Application{
             {
                 resultLabel.setText(resultLabel.getText().concat("."));
                 signLabel.add(".");
-                System.out.println(calculate.result);
+                //numbers.add(resultLabel.getText());
             }
         });
         
@@ -212,7 +208,6 @@ public class Main extends Application{
             {
                 resultLabel.setText(resultLabel.getText().concat("+"));
                 signLabel.add("+");
-                System.out.println(calculate.result);
             }
         });
         Button minusButton = new Button("-");
@@ -224,7 +219,6 @@ public class Main extends Application{
             {
                 resultLabel.setText(resultLabel.getText().concat("-"));
                 signLabel.add("-");
-                System.out.println(calculate.result);
             }
         });
         
@@ -237,7 +231,6 @@ public class Main extends Application{
             {
                 resultLabel.setText(resultLabel.getText().concat("*"));
                 signLabel.add("*");
-                System.out.println(calculate.result);
             }
         });
         
@@ -250,7 +243,6 @@ public class Main extends Application{
             {
                 resultLabel.setText(resultLabel.getText().concat("/"));
                 signLabel.add("/");
-                System.out.println(calculate.result);
             }
         });
         
@@ -263,36 +255,33 @@ public class Main extends Application{
             {
                 for (int i = 0; i < numbers.size(); i++)
                 {
-                    for (int s = 0; s < signLabel.size(); s ++)
+                   for (int s = 0; s < signLabel.size(); s++)
                     {
-                        switch(signLabel.get(i))
-                {
-                    case "+":
-                        calculate.result = numbers.get(i) + numbers.get(i);
-                        break;
-                    case "-":
-                        calculate.result = numbers.get(0) - numbers.get(1);
-                        break;
-                    case "*":
-                        calculate.result = numbers.get(0) * numbers.get(1);
-                        break;
-                    case "/":
-                        calculate.result = numbers.get(0) / numbers.get(1);
-                        break;
-//                    case ".":
-//                        numbers.get(1) /= 10f;
-//                        break;
-                }
-                    }
-                    
-                }               
-
+                        switch(signLabel.get(s))
+                            {
+                                case "+":
+                                    calculate.result = numbers.get(0) + numbers.get(i);
+                                    break;
+                                case "-":
+                                    calculate.result = numbers.get(0) - numbers.get(1)  - numbers.get(2);
+                                    break;
+                                case "*":
+                                    calculate.result = numbers.get(0) * numbers.get(1);
+                                    break;
+                                case "/":
+                                    calculate.result = numbers.get(0) / numbers.get(1);
+                                    break;
+            //                    case ".":
+            //                        numbers.get(i) /= 10f;
+            //                        break;
+                            }
+                    } 
+                }      
                 resultLabel.setText(String.valueOf(calculate.result));
-                System.out.println(calculate.result);
             }
         });
         
-        //CE is the clear button that reset everything
+        //CE button is the clear button that reset everything
         calculateButton.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
         Button clearButton = new Button("CE");
         clearButton.setBorder(new Border(new BorderStroke(Color.DARKGREY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
@@ -309,7 +298,7 @@ public class Main extends Application{
         });
         
         //This is the graphic interface of the buttons
-        gridPane.add(resultLabel, 1, 0);  
+        //gridPane.add(resultLabel, 1, 0);  
         gridPane.add(clearButton, 0, 0);      
         gridPane.add(sevenButton, 0, 1);
         gridPane.add(eightButton, 1, 1);
@@ -328,10 +317,16 @@ public class Main extends Application{
         gridPane.add(calculateButton, 2, 4);
         gridPane.add(plusButton, 3, 4);
         
+        VBox vBox = new VBox(resultLabel);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(25));
+        borderPane.setTop(vBox);
+        borderPane.setBottom(gridPane);
         
         
         //Create the border pane
-        Scene scene = new Scene(gridPane, 500, 500);        
+        //Scene scene = new Scene(gridPane, 500, 500);        
+        Scene scene = new Scene(borderPane, 300, 350);
         stage.setTitle("Calculator");
         stage.setScene(scene);
         stage.show();
