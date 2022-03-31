@@ -37,8 +37,10 @@ public class JavaFxSwitchScreenContent extends Application
         
         Scene scene = new Scene(borderPane, 400, 375);
         
-        stage.setTitle("FX Example");
+        //To style with CSS
         scene.getStylesheets().add(JavaFxSwitchScreenContent.class.getResource("login.css").toExternalForm());
+        
+        stage.setTitle("FX Example");
         stage.setScene(scene);
         stage.show();
     }
