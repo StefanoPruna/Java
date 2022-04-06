@@ -72,8 +72,6 @@ public class NetSavingAccount extends ATM implements Interest
             if(this.principal < 0)
             {
                 throw new InsufficientFundsException("You don't have enough money in your balace: $" + principal);
-//                this.principal += howMuchWithdraw;
-//                return 0f;
             }
             else if(howMuchWithdraw > getWithdrawLimit())
             {
@@ -81,7 +79,6 @@ public class NetSavingAccount extends ATM implements Interest
                 this.principal += howMuchWithdraw;
                 return 0f;
             }
-
             this.principal -= howMuchWithdraw;//add the deposit and reduce the cash withdraw to the principal
         }
         else

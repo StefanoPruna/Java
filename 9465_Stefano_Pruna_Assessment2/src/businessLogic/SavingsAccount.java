@@ -64,7 +64,7 @@ public class SavingsAccount extends ATM implements Interest
             //Check if there is enough balance to withdraw
             if(this.principal < 0)
             {
-                throw new InsufficientFundsException("You don't have enough money in your balace: $" + principal);
+                throw new InsufficientFundsException("You don't have enough money in your balace: $" + this.principal);
             }
             else if(howMuchWithdraw > getWithdrawLimit())
             {
@@ -97,10 +97,11 @@ public class SavingsAccount extends ATM implements Interest
         //interest = principal * rate * time;
         setRate(0.0155f);
         setTime(getRate() / 365);
-        setInterest(principal * getRate() * getTime());
-        balance = principal + getInterest();
+        setInterest(this.principal * getRate() * getTime());
+        balance = this.principal + getInterest();
         
-        return getInterest();
+        //return getInterest();
+        return balance;
     }
 
     //I added the withdraw limit as the user can choose it in this account

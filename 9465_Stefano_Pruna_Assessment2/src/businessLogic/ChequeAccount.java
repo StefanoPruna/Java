@@ -26,7 +26,7 @@ public class ChequeAccount extends ATM
     }
     
     @Override
-    public Float withdraw() 
+    public Float withdraw() throws InsufficientFundsException
     {
         //Check if the test allows to use only the 20, 50 and 100 notes
         if (howMuchWithdraw == 20 || howMuchWithdraw == 50 || howMuchWithdraw == 100)
@@ -35,10 +35,9 @@ public class ChequeAccount extends ATM
             //Check if there is enough balance to withdraw
             if(this.principal < 0)
             {
-                System.out.println("You don't have enough money in your balace: $" + this.principal);
-                this.principal += howMuchWithdraw;
-                return 0f;
+                throw new InsufficientFundsException("You don't have enough money in your balace: $" + this.principal);
             }
+            //this.principal -= howMuchWithdraw;//add the deposit and reduce the cash withdraw to the principal
         }
         else
         {
@@ -48,7 +47,7 @@ public class ChequeAccount extends ATM
             //return 0, because it didn't withdraw anything
             return 0f;
         }
-                
+        deposit();
         //and return how much withdraw between 20, 50 and 100
         return howMuchWithdraw;        
     }
@@ -56,8 +55,16 @@ public class ChequeAccount extends ATM
     @Override
     public String toString()
     {
-        return "ATM{" + "You have withdrawn: $" + withdraw() + "\nYou have deposited: $" + amountDeposit
+        try
+        {
+            return "ATM{" + "You have withdrawn: $" + withdraw() + "\nYou have deposited: $" + amountDeposit
                 + "\nThe current balance is: " + this.principal + '}';
+        }
+        catch (InsufficientFundsException ex) 
+        {
+            System.out.println(ex);
+        }
+        return "Account{" + "Your balance is: $" + (principal + howMuchWithdraw) + " you cannot withdraw $" + howMuchWithdraw + '}';  
     }
     
 }
