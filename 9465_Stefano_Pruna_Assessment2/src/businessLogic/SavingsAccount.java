@@ -31,7 +31,6 @@ public class SavingsAccount extends ATM implements Interest
     public void setInterest(Float interest) {
         super.setInterest(interest); 
     }
-    
     public Float getBalance() {
         return balance;
     }
@@ -73,7 +72,7 @@ public class SavingsAccount extends ATM implements Interest
                 return 0f;
             }
 
-            this.principal -= howMuchWithdraw;//add the deposit and reduce the cash withdraw to the principal
+            //this.principal -= howMuchWithdraw;//add the deposit and reduce the cash withdraw to the principal
         }
         else
         {
@@ -100,8 +99,7 @@ public class SavingsAccount extends ATM implements Interest
         setInterest(this.principal * getRate() * getTime());
         balance = this.principal + getInterest();
         
-        //return getInterest();
-        return balance;
+        return getInterest();
     }
 
     //I added the withdraw limit as the user can choose it in this account
