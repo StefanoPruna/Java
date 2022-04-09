@@ -5,6 +5,7 @@ import businessLogic.ChequeAccount;
 import businessLogic.FixedAccount;
 import businessLogic.InsufficientFundsException;
 import businessLogic.NetSavingAccount;
+import businessLogic.PassedWithdrawLimitException;
 import businessLogic.SavingsAccount;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +33,11 @@ public class Assessment2 extends Application
     //Creating the GUI interface with the windows to navigate in between
     private int currentScreen = Constants.LOGIN_SCREEN;
     private BorderPane borderPane;
+    
+    private Float value;
+    private Integer valueLimit;
+    private Integer setWithdrawLimit;
+    private Integer withdrawTotal;
 
     @Override
     public void start(Stage stage) throws Exception 
@@ -265,6 +271,9 @@ public class Assessment2 extends Application
     private void setUpSavingsScreen()
     {
         SavingsAccount savings = new SavingsAccount();
+        //I'm making an assumption that the Current Principal is $1000
+        savings.setPrincipal(1000f);
+        //int withdrawLimit;
         
         GridPane gridPane = new GridPane();
        
@@ -279,6 +288,13 @@ public class Assessment2 extends Application
         TextField amountTextField = new TextField();
         amountTextField.editableProperty().set(false);
         
+        //Label for the limit to withdraw - 
+        //User can choose the limit in the Savings account only
+        Label withdrawLimitText = new Label("Insert the withdraw limit");
+        withdrawLimitText.setId("limit");
+        TextField withdrawLimitTextField = new TextField();
+        withdrawLimitTextField.editableProperty().set(false);
+        
         gridPane.add(accountLabel, 1, 0);
         gridPane.add(withdrawLabel, 1, 1, 2, 1);
         //gridPane.add(amountLabel, 1, 2);
@@ -288,16 +304,18 @@ public class Assessment2 extends Application
         Label withdrewLabel = new Label("Withdraw");
         Label interestLabel = new Label("Interest");
         Label balanceLabel = new Label("Balance");
+        Label withdrawLimitLabel = new Label("Limit");
 
                
-        VBox vBox1 = new VBox(withdrewLabel, interestLabel, balanceLabel);
+        VBox vBox1 = new VBox(withdrewLabel, withdrawLimitLabel, interestLabel, balanceLabel);
         
         Label withdrawValueLabel = new Label(" $"); 
         Label interestValueLabel = new Label(" $");
         //I'm making an assumption that the Current Principal is $1000
         Label balanceValueLabel = new Label(" $1000");
+        Label withdrawLimitValueLabel = new Label(" ");
         
-        VBox vBox2 = new VBox(withdrawValueLabel, interestValueLabel, balanceValueLabel);
+        VBox vBox2 = new VBox(withdrawValueLabel, withdrawLimitValueLabel, interestValueLabel, balanceValueLabel);
         
         HBox hBox1 = new HBox(vBox1, vBox2);  
         gridPane.add(vBox0, 2, 2);
@@ -317,43 +335,44 @@ public class Assessment2 extends Application
         numPad.add(twenty, 0, 0);
         numPad.add(fifty, 1, 0);
         numPad.add(hundred, 0, 1);
-        
-//        numPad.add(five, 1, 1);
-//        numPad.add(six, 2, 1);
-//        numPad.add(seven, 0, 2);
-//        numPad.add(eight, 1, 2);
-//        numPad.add(nine, 2, 2);
-//        numPad.add(zero, 0, 3);
         numPad.add(clear, 1, 3, 2, 1); //the last two numbers will expand the button
         
         twenty.setOnAction(new EventHandler<ActionEvent>() //throws InsufficientFundsException
         {
             @Override
             public void handle(ActionEvent t) 
-            {
-                try {
+            {                   
+                try {                    
                     amountTextField.appendText("20");
-                    Float value = Float.valueOf(amountTextField.getText());
+                    value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
-                    savings.setAmountDeposit(0);
-                    savings.setWithdrawLimit(200);
-                    savings.setHowMuchWithdraw(20f);
-                    Float principalValue = Float.valueOf(savings.getBalance());
-                    savings.getPrincipal();
-                    savings.deposit();
-                    Float withdrew = savings.withdraw();
-                    Float interestValue = savings.calculateInterest();
-                    Float balance = (savings.getPrincipal() + interestValue);
-                    balanceValueLabel.setText("$" + balance.toString());
-                    interestValueLabel.setText("$" + interestValue.toString());
-                    if(savings.getPrincipal() < 0)
-                    {                      
-                        //throw new InsufficientFundsException("You don't have enough money in your balace");
+                    savings.setAmountDeposit(0);                    
+                    savings.setHowMuchWithdraw(20f);                    
+                    savings.setWithdrawLimit(withdrawTotal);
+                    //savings.setHowMuchWithdraw(withdrawTotal);
+                    if(savings.getHowMuchWithdraw() > setWithdrawLimit)
+                    {
+                        withdrawLimitTextField.setText("You've reached the daily limit to withdraw");
                     }
+                    else
+                    {
+                        savings.deposit();
+                        Float withdrew = savings.withdraw();
+                        Float interestValue = savings.calculateInterest();
+                        Float balance = (savings.getPrincipal() + interestValue);
+                        balanceValueLabel.setText("$" + balance.toString());
+                        interestValueLabel.setText("$" + interestValue.toString());
+                        if(savings.getPrincipal() < 0)
+                        {                      
+                            //throw new InsufficientFundsException("You don't have enough money in your balace");
+                            amountTextField.setText("You don't have enough money");  
+                        }
+                    }                     
                 } catch (InsufficientFundsException ex) 
                 {
-                    amountTextField.setText("You don't have enough money");  
-                }
+                    //amountTextField.setText("You don't have enough money");  
+                }   
+                //withdrawTotal = Integer.valueOf((savings.getHowMuchWithdraw() + savings.getHowMuchWithdraw())); 
             }
         });
         fifty.setOnAction(new EventHandler<ActionEvent>() 
@@ -363,22 +382,31 @@ public class Assessment2 extends Application
             {
                 try {
                     amountTextField.appendText("50");
-                    Float value = Float.valueOf(amountTextField.getText());
+                    value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
                     savings.setAmountDeposit(0);                    
-                    savings.setWithdrawLimit(200);
+                    savings.setWithdrawLimit(setWithdrawLimit);
+                    //savings.setWithdrawLimit(200);
                     savings.setHowMuchWithdraw(50f);
-                    savings.setPrincipal(1000f);
+                    if(savings.getHowMuchWithdraw() > setWithdrawLimit)
+                    {
+                        withdrawLimitTextField.setText("You've reached the daily limit to withdraw");
+                    }
                     savings.deposit();                
                     Float withdrew = savings.withdraw();
                     Float interestValue = savings.calculateInterest();
                     Float balance = (savings.getPrincipal() + interestValue);
                     balanceValueLabel.setText("$" + balance.toString());
                     interestValueLabel.setText("$" + interestValue.toString());
+                    if(savings.getPrincipal() < 0)
+                    {                      
+                        //throw new InsufficientFundsException("You don't have enough money in your balace");
+                        amountTextField.setText("You don't have enough money");  
+                    }
                 } catch (InsufficientFundsException ex) 
                 {
-                    amountTextField.setText("You don't have enough money");                    
-                }   
+                    //amountTextField.setText("You don't have enough money");  
+                }                    
             }
         });
         hundred.setOnAction(new EventHandler<ActionEvent>() 
@@ -388,22 +416,30 @@ public class Assessment2 extends Application
             {
                 try {
                     amountTextField.appendText("100");
-                    Float value = Float.valueOf(amountTextField.getText());
+                    value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
-                    savings.setAmountDeposit(0);                    
-                    savings.setWithdrawLimit(200);
+                    savings.setAmountDeposit(0);  
+                    savings.setWithdrawLimit(setWithdrawLimit);
                     savings.setHowMuchWithdraw(100f);
-                    savings.setPrincipal(1000f);
+                    if(savings.getHowMuchWithdraw() > setWithdrawLimit)
+                    {
+                        withdrawLimitTextField.setText("You've reached the daily limit to withdraw");
+                    }
                     savings.deposit();                
                     Float withdrew = savings.withdraw();
                     Float interestValue = savings.calculateInterest();
                     Float balance = (savings.getPrincipal() + interestValue);
                     balanceValueLabel.setText("$" + balance.toString());
-                    interestValueLabel.setText("$" + interestValue.toString());
-                } catch (InsufficientFundsException ex) 
-                {
-                    amountTextField.setText("You don't have enough money");                    
-                }  
+                    interestValueLabel.setText("$" + interestValue.toString());                
+                    if(savings.getPrincipal() < 0)
+                        {                      
+                            //throw new InsufficientFundsException("You don't have enough money in your balace");
+                            amountTextField.setText("You don't have enough money");
+                        }
+                }catch (InsufficientFundsException ex) 
+                    {
+                        //amountTextField.setText("You don't have enough money");  
+                    }  
             }
         });
         clear.setOnAction(new EventHandler<ActionEvent>() {
@@ -413,10 +449,136 @@ public class Assessment2 extends Application
             {
                 amountTextField.setText("");
                 interestValueLabel.setText("");
+                withdrawLimitTextField.setText("");
             }
         });
         
-        VBox vBox = new VBox(gridPane, numPad);
+        
+        
+        //Single numbers Pad for the daily limit
+        GridPane singleNumPad = new GridPane();
+        Button one = new Button("1");
+        Button two = new Button("2");
+        Button three = new Button("3");
+        Button four = new Button("4");
+        Button five = new Button("5");
+        Button six = new Button("6");
+        Button seven = new Button("7");
+        Button eight = new Button("8");
+        Button nine = new Button("9");
+        Button zero = new Button("0");
+        
+//        singleNumPad.add(withdrawLimit, 0, 0, 2, 1);
+        //singleNumPad.add(withdrawLimitTextField, 0, 0);
+        singleNumPad.add(one, 0, 2);
+        singleNumPad.add(two, 1, 2);
+        singleNumPad.add(three, 2, 2);
+        singleNumPad.add(four, 0, 3);        
+        singleNumPad.add(five, 1, 3);
+        singleNumPad.add(six, 2, 3);
+        singleNumPad.add(seven, 0, 4);
+        singleNumPad.add(eight, 1, 4);
+        singleNumPad.add(nine, 2, 4);
+        singleNumPad.add(zero, 0, 5);
+        singleNumPad.add(clear, 1, 6, 2, 1); //the last two numbers will expand the button
+        //Set all the numbers when are clicked
+        one.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("1");
+            }
+        });
+        two.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("2");
+            }
+        });
+        three.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("3");                 
+            }
+        });
+        four.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("4");
+            }
+        });
+        five.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("5");
+            }
+        });
+        six.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("6");
+            }
+        });
+        seven.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("7");
+            }
+        });
+        eight.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("8");
+            }
+        });
+        nine.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("9");
+            }
+        });
+        zero.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                withdrawLimitTextField.appendText("0");
+            }
+        });
+        Button enter = new Button("Enter");
+        enter.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {                  
+                 setWithdrawLimit = Integer.valueOf(withdrawLimitTextField.getText());
+                 valueLimit = Integer.valueOf(withdrawLimitTextField.getText());
+                 withdrawLimitValueLabel.setText("$" + valueLimit.toString());
+            }
+        });
+        
+        HBox hBox = new HBox(enter);
+        hBox.setAlignment(Pos.CENTER_RIGHT);
+        
+        //VBox vBox = new VBox(gridPane, numPad, enter);
+        VBox vBox = new VBox(gridPane, numPad, withdrawLimitText, withdrawLimitTextField, singleNumPad, enter);
         borderPane.setCenter(vBox);
     }
 }
