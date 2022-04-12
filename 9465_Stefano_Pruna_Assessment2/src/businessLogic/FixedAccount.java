@@ -66,7 +66,7 @@ public class FixedAccount extends ATM implements Interest
             {
                 throw new InsufficientFundsException("You don't have enough money in your balace: $" + this.principal);
             }
-            this.principal -= howMuchWithdraw;//add the deposit and reduce the cash withdraw to the principal
+            //this.principal -= howMuchWithdraw;//add the deposit and reduce the cash withdraw to the principal
         }
         else if (howMuchWithdraw == 0)
             System.out.println("You didn't withraw, thus you will have the interest in your final balance");

@@ -21,7 +21,7 @@ public class NetSavingAccount extends ATM implements Interest
     @Override
     public void setWithdrawLimit(Integer withdrawLimit) 
     {
-        super.setWithdrawLimit(1000);
+        super.setWithdrawLimit(500);
     }
 
     @Override
