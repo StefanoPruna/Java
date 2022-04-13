@@ -1,29 +1,22 @@
 
 package businessLogic;
 
-
-public class NetSavingAccount extends ATM implements Interest
+public class SavingsAccount extends ATM implements Interest
 {
-    //Monthly interest is higher than the daily ones
-    //There is a pre-set limit to withdraw
-    //Time is 1/12
-    //Inherited the data types/variable and method from ATM and from the Interface Interest
+    //Daily time is rate / 365
+    //Interest = principal * rate * time   
+    //Inherited the data types/variable and method from ATM and the interface Interest
     
-    public NetSavingAccount()
-    {        
-    }
-
-    public NetSavingAccount(Float howMuchWithdraw, Float principal, Integer amountDeposit, Integer withdrawLimit) {
+    //Constructor
+    public SavingsAccount(Float howMuchWithdraw, Float principal, Integer amountDeposit, Integer withdrawLimit) {
         super(howMuchWithdraw, principal, amountDeposit, withdrawLimit);
     }
 
-    //Because they are all private, I override to change the value manually
-    @Override
-    public void setWithdrawLimit(Integer withdrawLimit) 
-    {
-        super.setWithdrawLimit(500);
+    public SavingsAccount() {
     }
 
+    //all the get and set
+    //I need to override these, because they are private
     @Override
     public void setRate(Float rate) {
         super.setRate(rate); 
@@ -38,7 +31,6 @@ public class NetSavingAccount extends ATM implements Interest
     public void setInterest(Float interest) {
         super.setInterest(interest); 
     }
-    
     public Float getBalance() {
         return balance;
     }
@@ -71,7 +63,7 @@ public class NetSavingAccount extends ATM implements Interest
             //Check if there is enough balance to withdraw
             if(this.principal < 0)
             {
-                throw new InsufficientFundsException("You don't have enough money in your balace: $" + principal);
+                throw new InsufficientFundsException("You don't have enough money in your balace: $" + this.principal);
             }
             else if(howMuchWithdraw > getWithdrawLimit())
             {
@@ -79,6 +71,7 @@ public class NetSavingAccount extends ATM implements Interest
                 this.principal += howMuchWithdraw;
                 return 0f;
             }
+
             //this.principal -= howMuchWithdraw;//add the deposit and reduce the cash withdraw to the principal
         }
         else
@@ -93,34 +86,36 @@ public class NetSavingAccount extends ATM implements Interest
         //and return how much withdraw
         return howMuchWithdraw; 
     }
-
+    
     @Override
     public Float calculateInterest() 
     {
-//        rate = 0.02f;
-//        time = 1/12f;
-//        interest = principal * rate * time;
-        setRate(0.02f);
-        setTime(1/12f);
+        //Interest calculation
+        //rate = 0.0155f;
+        //time = rate / 365;
+        //interest = principal * rate * time;
+        setRate(0.0155f);
+        setTime(getRate() / 365);
         setInterest(this.principal * getRate() * getTime());
         balance = this.principal + getInterest();
         
         return getInterest();
     }
 
+    //I added the withdraw limit as the user can choose it in this account
+    //withdrawlimit is private, thus I have to call it with the get
     @Override
     public String toString() 
     {
         try
         {
-            return "ATM{" + "You have withdrawn: $" + withdraw() + "\nYou have deposit: $" + amountDeposit + "\nThe current balance is: " + principal +
-                "\nYour interest is $" + calculateInterest() + "\nAnd your final balance is: $" + balance + '}';
+            return "ATM{" + "You have withdrawn: $" + withdraw() + "\nThe withdraw limit is: $" + getWithdrawLimit() + "\nYou have deposited: $" + amountDeposit
+                + "\nThe current balance is: " + principal + "\nYour interest is $" + calculateInterest() + "\nAnd your balance is: $" + balance + '}';
         }
         catch (InsufficientFundsException ex) 
         {
             System.out.println(ex);
         }
-        return "Account{" + "Your balance is: $" + (principal + howMuchWithdraw) + " you cannot withdraw $" + howMuchWithdraw + '}';        
-    }
-       
+        return "Account{" + "Your balance is: $" + (principal + howMuchWithdraw) + " you cannot withdraw $" + howMuchWithdraw + '}';
+    }    
 }

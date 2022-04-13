@@ -968,7 +968,7 @@ public class Assessment2 extends Application
                     {        
                         interestValueLabel.setText("You have withdrawn before the contract period");
                         Float withdrew = fixedAccount.withdraw();
-                        Float balance = (fixedAccount.getPrincipal());// - fixedAccount.getHowMuchWithdraw());
+                        Float balance = (fixedAccount.getPrincipal() - fixedAccount.getHowMuchWithdraw());
                         balanceValueLabel.setText("$" + balance.toString());                                               
                     }                    
                     else if(fixedAccount.getPrincipal() < 0)
