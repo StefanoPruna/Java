@@ -54,7 +54,6 @@ public class Assessment2 extends Application
     private Float value;
     //User insert the withdraw value limit for the Savings account
     private Integer withdrawValueLimit;
-    private Integer deposit;
     //to check when reaches the withdraw limit fpr the Savings and Net Savings accounts
     private Float savingsWithdrawTotal = 0f;
     private Float netWithdrawTotal = 0f;
@@ -67,7 +66,7 @@ public class Assessment2 extends Application
         //This method will be in charge of displaying a particular screen
         displayScreen(currentScreen);
         
-        Scene scene = new Scene(borderPane, 400, 500);
+        Scene scene = new Scene(borderPane, 400, 450);
         
         //To style with CSS
         scene.getStylesheets().add(Assessment2.class.getResource("login.css").toExternalForm());
@@ -363,11 +362,6 @@ public class Assessment2 extends Application
         TextField withdrawLimitTextField = new TextField();
         withdrawLimitTextField.editableProperty().set(false);
         
-        //Label for the deposit
-        Label depositText = new Label("Insert the deposit");
-        TextField depositTextField = new TextField();
-        depositTextField.editableProperty().set(false);
-
         gridPane.add(accountLabel, 1, 0);
         gridPane.add(withdrawLabel, 1, 1, 2, 1);
         //gridPane.add(amountLabel, 1, 2);
@@ -378,19 +372,17 @@ public class Assessment2 extends Application
         Label interestLabel = new Label("Interest");
         Label balanceLabel = new Label("Balance");
         Label withdrawLimitLabel = new Label("Limit");
-        Label depositLabel = new Label("Deposit");
 
                
-        VBox vBox1 = new VBox(withdrewLabel, withdrawLimitLabel, depositLabel, interestLabel, balanceLabel);
+        VBox vBox1 = new VBox(withdrewLabel, withdrawLimitLabel, interestLabel, balanceLabel);
         
         Label withdrawValueLabel = new Label(" $"); 
         Label interestValueLabel = new Label(" $");
         //I'm making an assumption that the Current Principal is $1000
         Label balanceValueLabel = new Label(" $" + savingsBalance);
         Label withdrawLimitValueLabel = new Label(" $" + withdrawValueLimit);
-        Label depositValueLabel = new Label(" $" + deposit);
         
-        VBox vBox2 = new VBox(withdrawValueLabel, withdrawLimitValueLabel, depositValueLabel, interestValueLabel, balanceValueLabel);
+        VBox vBox2 = new VBox(withdrawValueLabel, withdrawLimitValueLabel, interestValueLabel, balanceValueLabel);
         
         HBox hBox1 = new HBox(vBox1, vBox2);  
         gridPane.add(vBox0, 2, 2);
@@ -422,8 +414,7 @@ public class Assessment2 extends Application
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
                     //withdrawValueLimit = Integer.valueOf(withdrawLimitTextField.getText());
-                    savings.setAmountDeposit(0);   
-//                    savings.deposit();
+                    savings.setAmountDeposit(0);                    
                     savings.setHowMuchWithdraw(20f);                    
                     savings.setWithdrawLimit(withdrawValueLimit);
                     savingsWithdrawTotal += value;
@@ -668,124 +659,6 @@ public class Assessment2 extends Application
                  withdrawLimitValueLabel.setText("$" + withdrawValueLimit.toString());
             }
         });
-        //Single numbers Pad for the daily limit
-        GridPane depositNumPad = new GridPane();
-        Button oneDepo = new Button("1");
-        Button twoDepo = new Button("2");
-        Button threeDepo = new Button("3");
-        Button fourDepo = new Button("4");
-        Button fiveDepo = new Button("5");
-        Button sixDepo = new Button("6");
-        Button sevenDepo = new Button("7");
-        Button eightDepo = new Button("8");
-        Button nineDepo = new Button("9");
-        Button zeroDepo = new Button("0");
-        
-//        singleNumPad.add(withdrawLimit, 0, 0, 2, 1);
-        //singleNumPad.add(withdrawLimitTextField, 0, 0);
-        depositNumPad.add(oneDepo, 0, 2);
-        depositNumPad.add(twoDepo, 1, 2);
-        depositNumPad.add(threeDepo, 2, 2);
-        depositNumPad.add(fourDepo, 0, 3);        
-        depositNumPad.add(fiveDepo, 1, 3);
-        depositNumPad.add(sixDepo, 2, 3);
-        depositNumPad.add(sevenDepo, 0, 4);
-        depositNumPad.add(eightDepo, 1, 4);
-        depositNumPad.add(nineDepo, 2, 4);
-        depositNumPad.add(zeroDepo, 0, 5);
-        //singleNumPad.add(clear, 1, 6, 2, 1); //the last two numbers will expand the button
-        //Set all the numbers when are clicked
-        oneDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("1");
-            }
-        });
-        twoDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("2");
-            }
-        });
-        threeDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("3");                 
-            }
-        });
-        fourDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("4");
-            }
-        });
-        fiveDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("5");
-            }
-        });
-        sixDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("6");
-            }
-        });
-        sevenDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("7");
-            }
-        });
-        eightDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("8");
-            }
-        });
-        nineDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("9");
-            }
-        });
-        zeroDepo.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {
-                depositTextField.appendText("0");
-            }
-        });
-        Button depositButton = new Button("Deposit");
-        depositButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) 
-            {    
-                 deposit = Integer.valueOf(depositTextField.getText());
-                 depositValueLabel.setText("$" + deposit.toString());
-                 savings.deposit();
-            }
-        });
         //For some reason, it needs to be clicked twice
         backButton1.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -797,16 +670,11 @@ public class Assessment2 extends Application
             }
         });
         
-        HBox hBoxPad = new HBox(singleNumPad);
-        hBoxPad.setAlignment(Pos.CENTER_LEFT);
-        HBox hBoxPad2 = new HBox(depositNumPad);
-        hBoxPad2.setAlignment(Pos.CENTER_RIGHT);
-        HBox hBoxNumPad = new HBox(hBoxPad, hBoxPad2);
-        HBox hBox = new HBox(enter, depositButton);
-        hBox.setAlignment(Pos.CENTER_LEFT);
+        HBox hBox = new HBox(enter);
+        hBox.setAlignment(Pos.CENTER_RIGHT);
         
         //VBox vBox = new VBox(gridPane, numPad, enter);
-        VBox vBox = new VBox(gridPane, numPad, withdrawLimitText, withdrawLimitTextField, depositText, depositTextField, hBoxNumPad, hBox, backButton1);
+        VBox vBox = new VBox(gridPane, numPad, withdrawLimitText, withdrawLimitTextField, singleNumPad, enter, backButton1);
         borderPane.setCenter(vBox);
     }
     
