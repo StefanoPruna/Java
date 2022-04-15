@@ -358,7 +358,7 @@ public class Assessment2 extends Application
         
         //Label for the limit to withdraw - 
         //User can choose the limit in the Savings account only
-        Label withdrawLimitText = new Label("You have to insert the withdraw limit to calculate your balance:");
+        Label withdrawLimitText = new Label("You MUST insert the withdraw limit to calculate your balance:");
         withdrawLimitText.setId("limit");
         TextField withdrawLimitTextField = new TextField();
         withdrawLimitTextField.editableProperty().set(false);
@@ -423,7 +423,6 @@ public class Assessment2 extends Application
                     withdrawValueLabel.setText("$" + value.toString());
                     //withdrawValueLimit = Integer.valueOf(withdrawLimitTextField.getText());
                     savings.setAmountDeposit(0);   
-//                    savings.deposit();
                     savings.setHowMuchWithdraw(20f);                    
                     savings.setWithdrawLimit(withdrawValueLimit);
                     savingsWithdrawTotal += value;
@@ -544,6 +543,7 @@ public class Assessment2 extends Application
                 amountTextField.setText("");
                 interestValueLabel.setText("");
                 withdrawLimitTextField.setText("");
+                depositTextField.setText("");
             }
         });      
         
@@ -668,7 +668,7 @@ public class Assessment2 extends Application
                  withdrawLimitValueLabel.setText("$" + withdrawValueLimit.toString());
             }
         });
-        //Single numbers Pad for the daily limit
+        //Single numbers Pad for the deposit
         GridPane depositNumPad = new GridPane();
         Button oneDepo = new Button("1");
         Button twoDepo = new Button("2");
@@ -783,7 +783,9 @@ public class Assessment2 extends Application
             {    
                  deposit = Integer.valueOf(depositTextField.getText());
                  depositValueLabel.setText("$" + deposit.toString());
+                 savings.setAmountDeposit(deposit);
                  savings.deposit();
+                 balanceValueLabel.setText("$" + savings.getPrincipal());
             }
         });
         //For some reason, it needs to be clicked twice
@@ -797,6 +799,17 @@ public class Assessment2 extends Application
             }
         });
         
+        //Creating and setting the two number pads with their texts and text fields
+        HBox hBoxWithdrawText = new HBox(withdrawLimitText);
+        hBoxWithdrawText.setAlignment(Pos.CENTER_LEFT);
+        HBox hBoxDepositText = new HBox(depositText);
+        hBoxDepositText.setAlignment(Pos.CENTER_RIGHT);
+        HBox hBoxTexts = new HBox(withdrawLimitText, depositText);
+        HBox hBoxWithdrawTextField = new HBox(withdrawLimitTextField);
+        hBoxWithdrawTextField.setAlignment(Pos.CENTER_LEFT);
+        HBox hBoxDepositTextField = new HBox(depositTextField);
+        hBoxDepositTextField.setAlignment(Pos.CENTER_RIGHT);
+        HBox hBoxTextFields = new HBox(withdrawLimitTextField, depositTextField);        
         HBox hBoxPad = new HBox(singleNumPad);
         hBoxPad.setAlignment(Pos.CENTER_LEFT);
         HBox hBoxPad2 = new HBox(depositNumPad);
@@ -806,7 +819,7 @@ public class Assessment2 extends Application
         hBox.setAlignment(Pos.CENTER_LEFT);
         
         //VBox vBox = new VBox(gridPane, numPad, enter);
-        VBox vBox = new VBox(gridPane, numPad, withdrawLimitText, withdrawLimitTextField, depositText, depositTextField, hBoxNumPad, hBox, backButton1);
+        VBox vBox = new VBox(gridPane, numPad, hBoxTexts, hBoxTextFields, hBoxNumPad, hBox, backButton1);
         borderPane.setCenter(vBox);
     }
     
@@ -829,12 +842,10 @@ public class Assessment2 extends Application
         TextField amountTextField = new TextField();
         amountTextField.editableProperty().set(false);
         
-        //Label for the limit to withdraw - 
-        //User cannot choose the limit in the Net Savings account
-//        Label withdrawLimitText = new Label("You have to insert the withdraw limit to calculate your balance:");
-//        withdrawLimitText.setId("limit");
-//        TextField withdrawLimitTextField = new TextField();
-//        withdrawLimitTextField.editableProperty().set(false);
+        //Label for the deposit
+        Label depositText = new Label("Insert the deposit");
+        TextField depositTextField = new TextField();
+        depositTextField.editableProperty().set(false);
         
         gridPane.add(accountLabel, 1, 0);
         gridPane.add(withdrawLabel, 1, 1, 2, 1);
@@ -845,9 +856,10 @@ public class Assessment2 extends Application
         Label interestLabel = new Label("Interest");
         Label balanceLabel = new Label("Balance");
         Label withdrawLimitLabel = new Label("Limit");
+        Label depositLabel = new Label("Deposit");
 
                
-        VBox vBox1 = new VBox(withdrewLabel, withdrawLimitLabel, interestLabel, balanceLabel);
+        VBox vBox1 = new VBox(withdrewLabel, withdrawLimitLabel, depositLabel, interestLabel, balanceLabel);
         
         Label withdrawValueLabel = new Label(" $"); 
         Label interestValueLabel = new Label(" $");
@@ -856,8 +868,9 @@ public class Assessment2 extends Application
         //And the withdraw limit is $500 for testing purposes
         Label balanceValueLabel = new Label(" $" + netBalance);
         Label withdrawLimitValueLabel = new Label(" 500");
+        Label depositValueLabel = new Label(" $" + deposit);
         
-        VBox vBox2 = new VBox(withdrawValueLabel, withdrawLimitValueLabel, interestValueLabel, balanceValueLabel);
+        VBox vBox2 = new VBox(withdrawValueLabel, withdrawLimitValueLabel, depositValueLabel, interestValueLabel, balanceValueLabel);
         
         HBox hBox1 = new HBox(vBox1, vBox2);  
         gridPane.add(vBox0, 2, 2);
@@ -1005,9 +1018,129 @@ public class Assessment2 extends Application
             {
                 amountTextField.setText("");
                 interestValueLabel.setText("");
+                depositTextField.setText("");
             }
         }); 
+        //Single numbers Pad for the deposit
+        GridPane depositNumPad = new GridPane();
+        Button oneDepo = new Button("1");
+        Button twoDepo = new Button("2");
+        Button threeDepo = new Button("3");
+        Button fourDepo = new Button("4");
+        Button fiveDepo = new Button("5");
+        Button sixDepo = new Button("6");
+        Button sevenDepo = new Button("7");
+        Button eightDepo = new Button("8");
+        Button nineDepo = new Button("9");
+        Button zeroDepo = new Button("0");
         
+//        singleNumPad.add(withdrawLimit, 0, 0, 2, 1);
+        //singleNumPad.add(withdrawLimitTextField, 0, 0);
+        depositNumPad.add(oneDepo, 0, 2);
+        depositNumPad.add(twoDepo, 1, 2);
+        depositNumPad.add(threeDepo, 2, 2);
+        depositNumPad.add(fourDepo, 0, 3);        
+        depositNumPad.add(fiveDepo, 1, 3);
+        depositNumPad.add(sixDepo, 2, 3);
+        depositNumPad.add(sevenDepo, 0, 4);
+        depositNumPad.add(eightDepo, 1, 4);
+        depositNumPad.add(nineDepo, 2, 4);
+        depositNumPad.add(zeroDepo, 0, 5);
+        //singleNumPad.add(clear, 1, 6, 2, 1); //the last two numbers will expand the button
+        //Set all the numbers when are clicked
+        oneDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("1");
+            }
+        });
+        twoDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("2");
+            }
+        });
+        threeDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("3");                 
+            }
+        });
+        fourDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("4");
+            }
+        });
+        fiveDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("5");
+            }
+        });
+        sixDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("6");
+            }
+        });
+        sevenDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("7");
+            }
+        });
+        eightDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("8");
+            }
+        });
+        nineDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("9");
+            }
+        });
+        zeroDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("0");
+            }
+        });
+        Button depositButton = new Button("Deposit");
+        depositButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {    
+                 deposit = Integer.valueOf(depositTextField.getText());
+                 depositValueLabel.setText("$" + deposit.toString());
+                 netSavings.setAmountDeposit(deposit);
+                 netSavings.deposit();
+                 balanceValueLabel.setText("$" + netSavings.getPrincipal());
+            }
+        });
         backButton2.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -1018,11 +1151,13 @@ public class Assessment2 extends Application
             }
         });
         
-        //HBox hBox = new HBox(enter);
-        //hBox.setAlignment(Pos.CENTER_RIGHT);
-        
-        //VBox vBox = new VBox(gridPane, numPad, enter);
-        VBox vBox = new VBox(gridPane, numPad, backButton2);
+        //Creating and setting the number pad for the deposit with its text and text field
+        HBox hBoxDepositText = new HBox(depositText);
+        HBox hBoxDepositTextField = new HBox(depositTextField);
+        HBox hBoxDepositPad = new HBox(depositNumPad);
+        HBox hBoxDepositButton = new HBox(depositButton);
+        //Creating and setting the whole Grid Pane
+        VBox vBox = new VBox(gridPane, numPad, depositText, depositTextField, depositNumPad, depositButton, backButton2);
         borderPane.setCenter(vBox);
     }
     
@@ -1055,19 +1190,26 @@ public class Assessment2 extends Application
         gridPane.add(amountTextField, 2, 2, 2, 1);
         VBox vBox0 = new VBox(accountLabel, withdrawLabel, amountTextField);
         
+         //Label for the deposit
+        Label depositText = new Label("Insert the deposit");
+        TextField depositTextField = new TextField();
+        depositTextField.editableProperty().set(false);
+        
         Label withdrewLabel = new Label("Withdraw");
+        Label depositLabel = new Label("Deposit");
         Label interestLabel = new Label("Interest");
         Label balanceLabel = new Label("Balance");
                
-        VBox vBox1 = new VBox(withdrewLabel, interestLabel, balanceLabel);
+        VBox vBox1 = new VBox(withdrewLabel, depositLabel, interestLabel, balanceLabel);
         
         Label withdrawValueLabel = new Label(" $"); 
         Label interestValueLabel = new Label(" $");
         
         //I'm making an assumption that the Current Principal is $1000
         Label balanceValueLabel = new Label(" $" + fixedBalance);
+        Label depositValueLabel = new Label(" $" + deposit);
         
-        VBox vBox2 = new VBox(withdrawValueLabel, interestValueLabel, balanceValueLabel);
+        VBox vBox2 = new VBox(withdrawValueLabel, depositValueLabel, interestValueLabel, balanceValueLabel);
         
         HBox hBox1 = new HBox(vBox1, vBox2);  
         gridPane.add(vBox0, 2, 2);
@@ -1188,8 +1330,7 @@ public class Assessment2 extends Application
                         interestValueLabel.setText("You have withdrawn before the contract period");
                         Float withdrew = fixedAccount.withdraw();
                         balance = (fixedAccount.getPrincipal());// - fixedAccount.getHowMuchWithdraw());
-                        balanceValueLabel.setText("$" + balance.toString());
-                                               
+                        balanceValueLabel.setText("$" + balance.toString());                                               
                     }                    
                     else if(fixedAccount.getPrincipal() < 0)
                         amountTextField.setText("You don't have enough money");  
@@ -1217,6 +1358,7 @@ public class Assessment2 extends Application
             {
                 amountTextField.setText("");
                 interestValueLabel.setText("");
+                depositTextField.setText("");
             }
         }); 
         //For some reason, it needs to be clicked twice
@@ -1229,12 +1371,150 @@ public class Assessment2 extends Application
                 displayScreen(currentScreen);
             }
         });
+        //Single numbers Pad for the deposit
+        GridPane depositNumPad = new GridPane();
+        Button oneDepo = new Button("1");
+        Button twoDepo = new Button("2");
+        Button threeDepo = new Button("3");
+        Button fourDepo = new Button("4");
+        Button fiveDepo = new Button("5");
+        Button sixDepo = new Button("6");
+        Button sevenDepo = new Button("7");
+        Button eightDepo = new Button("8");
+        Button nineDepo = new Button("9");
+        Button zeroDepo = new Button("0");
         
-        //HBox hBox = new HBox(enter);
-        //hBox.setAlignment(Pos.CENTER_RIGHT);
-        
-        //VBox vBox = new VBox(gridPane, numPad, enter);
-        VBox vBox = new VBox(gridPane, numPad, backButton3);
+//        singleNumPad.add(withdrawLimit, 0, 0, 2, 1);
+        //singleNumPad.add(withdrawLimitTextField, 0, 0);
+        depositNumPad.add(oneDepo, 0, 2);
+        depositNumPad.add(twoDepo, 1, 2);
+        depositNumPad.add(threeDepo, 2, 2);
+        depositNumPad.add(fourDepo, 0, 3);        
+        depositNumPad.add(fiveDepo, 1, 3);
+        depositNumPad.add(sixDepo, 2, 3);
+        depositNumPad.add(sevenDepo, 0, 4);
+        depositNumPad.add(eightDepo, 1, 4);
+        depositNumPad.add(nineDepo, 2, 4);
+        depositNumPad.add(zeroDepo, 0, 5);
+        //singleNumPad.add(clear, 1, 6, 2, 1); //the last two numbers will expand the button
+        //Set all the numbers when are clicked
+        oneDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("1");
+            }
+        });
+        twoDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("2");
+            }
+        });
+        threeDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("3");                 
+            }
+        });
+        fourDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("4");
+            }
+        });
+        fiveDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("5");
+            }
+        });
+        sixDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("6");
+            }
+        });
+        sevenDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("7");
+            }
+        });
+        eightDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("8");
+            }
+        });
+        nineDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("9");
+            }
+        });
+        zeroDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("0");
+            }
+        });
+        Button depositButton = new Button("Deposit");
+        depositButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                if(fixedAccount.getEarlyWithdraw())
+                {
+                    interestValueLabel.setText("You have withdrawn before the contract period");
+                    deposit = Integer.valueOf(depositTextField.getText());
+                    depositValueLabel.setText("$" + deposit.toString());
+                    fixedAccount.setAmountDeposit(deposit);
+                    fixedAccount.deposit();
+                    balanceValueLabel.setText("$" + fixedAccount.getPrincipal());
+                }
+                else
+                {
+                    deposit = Integer.valueOf(depositTextField.getText());
+                    depositValueLabel.setText("$" + deposit.toString());
+                    fixedAccount.setAmountDeposit(deposit);
+                    fixedAccount.deposit();
+                    balanceValueLabel.setText("$" + fixedAccount.getPrincipal());
+                    Float interestValue = fixedAccount.calculateInterest();
+                    Float balance = (fixedAccount.getPrincipal() + interestValue);
+                    balanceValueLabel.setText("$" + balance.toString());
+                    interestValueLabel.setText("$" + interestValue.toString());
+                }
+            }
+        });
+        //Creating and setting the number pad for the deposit with its text and text field
+        HBox hBoxDepositText = new HBox(depositText);
+        HBox hBoxDepositTextField = new HBox(depositTextField);
+        HBox hBoxDepositPad = new HBox(depositNumPad);
+        HBox hBoxDepositButton = new HBox(depositButton);
+        //Creating and setting the whole Grid Pane
+        VBox vBox = new VBox(gridPane, numPad, depositText, depositTextField, depositNumPad, depositButton, backButton3);
+   
         borderPane.setCenter(vBox);
     }
     
@@ -1253,6 +1533,7 @@ public class Assessment2 extends Application
         accountLabel.setId("account-text");//to stylish the welcome text
         withdrawLabel.setId("withdraw");
         
+        
 //        Label amountLabel = new Label("$");
 //        amountLabel.setId("amount-text");
         TextField amountTextField = new TextField();
@@ -1263,17 +1544,23 @@ public class Assessment2 extends Application
         gridPane.add(amountTextField, 2, 2, 2, 1);
         VBox vBox0 = new VBox(accountLabel, withdrawLabel, amountTextField);
         
+        //Label for the deposit
+        Label depositText = new Label("Insert the deposit");
+        TextField depositTextField = new TextField();
+        depositTextField.editableProperty().set(false);
+        
         Label withdrewLabel = new Label("Withdraw");
+        Label depositLabel = new Label("Deposit");
         Label balanceLabel = new Label("Balance");
                
-        VBox vBox1 = new VBox(withdrewLabel, balanceLabel);
+        VBox vBox1 = new VBox(withdrewLabel, depositLabel, balanceLabel);
         
         Label withdrawValueLabel = new Label(" $"); 
-        
+        Label depositValueLabel = new Label(" $" + deposit);
         //I'm making an assumption that the Current Principal is $1000
         Label balanceValueLabel = new Label(" $" + chequeBalance);
         
-        VBox vBox2 = new VBox(withdrawValueLabel, balanceValueLabel);
+        VBox vBox2 = new VBox(withdrawValueLabel, depositValueLabel, balanceValueLabel);
         
         HBox hBox1 = new HBox(vBox1, vBox2);  
         gridPane.add(vBox0, 2, 2);
@@ -1398,6 +1685,7 @@ public class Assessment2 extends Application
             public void handle(ActionEvent t) 
             {
                 amountTextField.setText("");
+                depositTextField.setText("");
             }
         }); 
         
@@ -1411,11 +1699,134 @@ public class Assessment2 extends Application
             }
         });
         
-        //HBox hBox = new HBox(enter);
-        //hBox.setAlignment(Pos.CENTER_RIGHT);
+        //Single numbers Pad for the deposit
+        GridPane depositNumPad = new GridPane();
+        Button oneDepo = new Button("1");
+        Button twoDepo = new Button("2");
+        Button threeDepo = new Button("3");
+        Button fourDepo = new Button("4");
+        Button fiveDepo = new Button("5");
+        Button sixDepo = new Button("6");
+        Button sevenDepo = new Button("7");
+        Button eightDepo = new Button("8");
+        Button nineDepo = new Button("9");
+        Button zeroDepo = new Button("0");
         
-        //VBox vBox = new VBox(gridPane, numPad, enter);
-        VBox vBox = new VBox(gridPane, numPad, backButton4);
+//        singleNumPad.add(withdrawLimit, 0, 0, 2, 1);
+        //singleNumPad.add(withdrawLimitTextField, 0, 0);
+        depositNumPad.add(oneDepo, 0, 2);
+        depositNumPad.add(twoDepo, 1, 2);
+        depositNumPad.add(threeDepo, 2, 2);
+        depositNumPad.add(fourDepo, 0, 3);        
+        depositNumPad.add(fiveDepo, 1, 3);
+        depositNumPad.add(sixDepo, 2, 3);
+        depositNumPad.add(sevenDepo, 0, 4);
+        depositNumPad.add(eightDepo, 1, 4);
+        depositNumPad.add(nineDepo, 2, 4);
+        depositNumPad.add(zeroDepo, 0, 5);
+        //singleNumPad.add(clear, 1, 6, 2, 1); //the last two numbers will expand the button
+        //Set all the numbers when are clicked
+        oneDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("1");
+            }
+        });
+        twoDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("2");
+            }
+        });
+        threeDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("3");                 
+            }
+        });
+        fourDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("4");
+            }
+        });
+        fiveDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("5");
+            }
+        });
+        sixDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("6");
+            }
+        });
+        sevenDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("7");
+            }
+        });
+        eightDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("8");
+            }
+        });
+        nineDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("9");
+            }
+        });
+        zeroDepo.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {
+                depositTextField.appendText("0");
+            }
+        });
+        Button depositButton = new Button("Deposit");
+        depositButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) 
+            {    
+                 deposit = Integer.valueOf(depositTextField.getText());
+                 depositValueLabel.setText("$" + deposit.toString());
+                 chequeAccount.setAmountDeposit(deposit);
+                 chequeAccount.deposit();
+                 balanceValueLabel.setText("$" + chequeAccount.getPrincipal());
+            }
+        });
+        //Creating and setting the number pad for the deposit with its text and text field
+        HBox hBoxDepositText = new HBox(depositText);
+        HBox hBoxDepositTextField = new HBox(depositTextField);
+        HBox hBoxDepositPad = new HBox(depositNumPad);
+        HBox hBoxDepositButton = new HBox(depositButton);
+        //Creating and setting the whole Grid Pane
+        VBox vBox = new VBox(gridPane, numPad, depositText, depositTextField, depositNumPad, depositButton, backButton4);
+        
         borderPane.setCenter(vBox);
     }
 }
