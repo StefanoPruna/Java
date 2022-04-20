@@ -38,7 +38,7 @@ public class Assessment2 extends Application
     - I'm making an assumption that the Current Principal is $1000 for all the accounts
     - I set the limit for withdrawing to $500 in the Net Saving account for testing purposes
     - For the Fixed account, as soon as there is a withdraw, there won't be interest, because as stated in the assignment description,
-      we assume that any withdrawal is too early
+      we assume that any withdrawal is too early, however, the message will appear after a second attempt at withdrawing
     */
     
     //Creating the GUI interface with the windows to navigate in between
@@ -1021,7 +1021,8 @@ public class Assessment2 extends Application
         In this account there is not limit to withdraw.
         however, if there is a withdraw, there won't be any interest,
         because as stated in the assignment description,
-        we assume that any withdrawal is too early, thus there is no interest
+        we assume that any withdrawal is too early, thus there is no interest.
+        The message of no interest appears after the second attempt to withdraw
         */
         
         FixedAccount fixedAccount = new FixedAccount();
@@ -1093,6 +1094,8 @@ public class Assessment2 extends Application
                     withdrawValueLabel.setText("$" + value.toString());
                     fixedAccount.setAmountDeposit(0);                    
                     fixedAccount.setHowMuchWithdraw(20f); 
+                    //This message appears after the second attempt of withdrawing, 
+                    //but does not calculate the interest as it's supposed
                     interestValueLabel.setText("You have withdrawn before the contract period");
                     if(fixedAccount.getEarlyWithdraw())
                     {        
@@ -1130,6 +1133,8 @@ public class Assessment2 extends Application
                     withdrawValueLabel.setText("$" + value.toString());
                     fixedAccount.setAmountDeposit(0);                    
                     fixedAccount.setHowMuchWithdraw(50f); 
+                    //This message appears after the second attempt of withdrawing, 
+                    //but does not calculate the interest as it's supposed
                     interestValueLabel.setText("You have withdrawn before the contract period");
                     Float balance = (fixedAccount.getPrincipal());
                     balanceValueLabel.setText("$" + balance.toString());
@@ -1170,7 +1175,9 @@ public class Assessment2 extends Application
                     fixedAccount.setHowMuchWithdraw(100f); 
                     Float balance = (fixedAccount.getPrincipal());
                     if(fixedAccount.getEarlyWithdraw())
-                    {        
+                    {     
+                    //This message appears after the second attempt of withdrawing, 
+                    //but does not calculate the interest as it's supposed
                         interestValueLabel.setText("You have withdrawn before the contract period");
                         Float withdrew = fixedAccount.withdraw();
                         balance = (fixedAccount.getPrincipal());
@@ -1327,6 +1334,8 @@ public class Assessment2 extends Application
             {
                 if(fixedAccount.getEarlyWithdraw())
                 {
+                    //This message appears after the second attempt of withdrawing, 
+                    //but does not calculate the interest as it's supposed
                     interestValueLabel.setText("You have withdrawn before the contract period");
                     deposit = Integer.valueOf(depositTextField.getText());
                     depositValueLabel.setText("$" + deposit.toString());

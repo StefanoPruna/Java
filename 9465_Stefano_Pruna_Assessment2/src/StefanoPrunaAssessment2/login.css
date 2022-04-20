@@ -6,6 +6,8 @@ root {
 -fx-background-image: url("background.jpg");
 -fx-background-color:DodgerBlue;
 }
+
+//For all the labels
 .label {
     -fx-font-size: 15px;
     -fx-font-weight: bold;
@@ -19,6 +21,7 @@ root {
    -fx-fill: #818181;
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }
+
 #pin
 {
     -fx-font-size: 20px;
@@ -32,7 +35,7 @@ root {
 
 #enterButton
 {
-    -fx-padding: 10px;
+    -fx-padding: 10px 110px 5px;
 }
 
 //For the account texts
@@ -62,12 +65,12 @@ root {
 
 #backButton
 {
-    -fx-padding: 5px 18px 5px;
+    -fx-padding: 5px 30px 5px;
 }
 
 #clearButton
 {
-    -fx-padding: 0px 30px 15px;
+    -fx-padding: 0px 150px 15px;
 }
 
 //Text for the withdraw limit to insert for the Savings account
@@ -83,30 +86,30 @@ root {
 //Two numbers pad
 #numPad
 {
-    -fx-padding: 10px 5px;
+    -fx-padding: 10px 120px 5px;
     -fx-border: 15px;
 }
 
 //Single number pad
 #singleNumPad
 {
-    -fx-padding: 10px;
+    -fx-padding: 10px 110px 5px;
     -fx-border: 15px;
 }
 
 //VBox for the account buttons selection screen
 #vBox
 {
-    -fx-padding: 20px 20px 50px;
+    -fx-padding: 20px 10px 50px;
 }
 
 //HBox for the withdraw limit and deposit buttons in the savings account
 #hbox
 {
-    -fx-padding: 5px 20px 10px;
+    -fx-padding: 5px 50px 10px;
 }
 
 #depositButton
 {
-    -fx-padding: 5px 20px 10px;
+    -fx-padding: 5px 110px 10px;
 }
