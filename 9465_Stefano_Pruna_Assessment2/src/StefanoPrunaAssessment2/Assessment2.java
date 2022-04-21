@@ -32,7 +32,7 @@ public class Assessment2 extends Application
     
     /* GENERAL NOTES
     - I set the password as 0000 
-    - Log out and only the Savings Account Back buttons for some reason need to be clicked twice
+    - The Savings Account Back button for some reason needs to be clicked twice
     - As requested in the description of the assignment, 
       the ATMs can give only $20, $50 and $100 notes
     - I'm making an assumption that the Current Principal is $1000 for all the accounts
@@ -415,7 +415,8 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t) 
             {                   
-                try {                    
+                try {  
+                    amountTextField.setText("");
                     amountTextField.appendText("20");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -429,7 +430,7 @@ public class Assessment2 extends Application
                     }
                     else if(savings.getPrincipal() < 0)
                         {                      
-                            amountTextField.setText("You don't have enough money");  
+                            amountTextField.setText("You don't have enough money to withdraw");  
                         }
                     else
                     {
@@ -452,7 +453,8 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t)
             {
-                try {                    
+                try {    
+                    amountTextField.setText("");
                     amountTextField.appendText("50");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -466,7 +468,7 @@ public class Assessment2 extends Application
                     }
                     else if(savings.getPrincipal() < 0)
                         {                      
-                            amountTextField.setText("You don't have enough money");  
+                            amountTextField.setText("You don't have enough money to withdraw");  
                         }
                     else
                     {
@@ -489,7 +491,8 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t) 
             {
-                try {                    
+                try {  
+                    amountTextField.setText("");
                     amountTextField.appendText("100");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -503,7 +506,7 @@ public class Assessment2 extends Application
                     }
                     else if(savings.getPrincipal() < 0)
                         {                      
-                            amountTextField.setText("You don't have enough money");  
+                            amountTextField.setText("You don't have enough money to withdraw");  
                         }
                     else
                     {
@@ -646,6 +649,7 @@ public class Assessment2 extends Application
             {                  
                 withdrawValueLimit = Integer.valueOf(withdrawLimitDepositTextField.getText());
                 withdrawLimitValueLabel.setText("$" + withdrawValueLimit.toString());
+                withdrawLimitDepositTextField.setText("");
             }
         });
        
@@ -660,6 +664,7 @@ public class Assessment2 extends Application
                 savings.setAmountDeposit(deposit);
                 savings.deposit();
                 balanceValueLabel.setText("$" + savings.getPrincipal());
+                withdrawLimitDepositTextField.setText("");
             }
         });
         //For some reason, it needs to be clicked twice
@@ -759,6 +764,7 @@ public class Assessment2 extends Application
             public void handle(ActionEvent t) 
             {                   
                 try {                    
+                    amountTextField.setText("");
                     amountTextField.appendText("20");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -768,11 +774,11 @@ public class Assessment2 extends Application
                     netWithdrawTotal += value;
                     if(netWithdrawTotal > netSavings.getWithdrawLimit())
                     {
-                        amountTextField.setText("You've reached the daily limit to withdraw, Click Back or Logout");
+                        amountTextField.setText("You've reached the daily limit to withdraw");
                     }
                     else if(netSavings.getPrincipal() < 0)
                         {                      
-                            amountTextField.setText("You don't have enough money");  
+                            amountTextField.setText("You don't have enough money to withdraw");  
                         }
                     else
                     {
@@ -795,7 +801,8 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t) 
             {
-                try {                    
+                try {    
+                    amountTextField.setText("");
                     amountTextField.appendText("50");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -805,11 +812,11 @@ public class Assessment2 extends Application
                     netWithdrawTotal += value;
                     if(netWithdrawTotal > netSavings.getWithdrawLimit())
                     {
-                        amountTextField.setText("You've reached the daily limit to withdraw, Click Back or Logout");
+                        amountTextField.setText("You've reached the daily limit to withdraw");
                     }
                     else if(netSavings.getPrincipal() < 0)
                         {                      
-                            amountTextField.setText("You don't have enough money");  
+                            amountTextField.setText("You don't have enough money to withdraw");  
                         }
                     else
                     {
@@ -832,7 +839,8 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t) 
             {
-                try {                    
+                try {  
+                    amountTextField.setText("");
                     amountTextField.appendText("100");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -842,11 +850,11 @@ public class Assessment2 extends Application
                     netWithdrawTotal += value;
                     if(netWithdrawTotal > netSavings.getWithdrawLimit())
                     {
-                        amountTextField.setText("You've reached the daily limit to withdraw, Click Back or Logout");
+                        amountTextField.setText("You've reached the daily limit to withdraw");
                     }
                     else if(netSavings.getPrincipal() < 0)
                         {                      
-                            amountTextField.setText("You don't have enough money");  
+                            amountTextField.setText("You don't have enough money to withdraw");  
                         }
                     else
                     {
@@ -986,11 +994,12 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t) 
             {    
-                 deposit = Integer.valueOf(depositTextField.getText());
-                 depositValueLabel.setText("$" + deposit.toString());
-                 netSavings.setAmountDeposit(deposit);
-                 netSavings.deposit();
-                 balanceValueLabel.setText("$" + netSavings.getPrincipal());
+                deposit = Integer.valueOf(depositTextField.getText());
+                depositValueLabel.setText("$" + deposit.toString());
+                netSavings.setAmountDeposit(deposit);
+                netSavings.deposit();
+                balanceValueLabel.setText("$" + netSavings.getPrincipal());
+                depositTextField.setText("");
             }
         });
         backButton2.setOnAction(new EventHandler<ActionEvent>() {
@@ -1088,7 +1097,8 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t) 
             {     
-                try {   
+                try { 
+                    amountTextField.setText("");
                     amountTextField.appendText("20");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -1104,8 +1114,6 @@ public class Assessment2 extends Application
                         Float balance = (fixedAccount.getPrincipal());
                         balanceValueLabel.setText("$" + balance.toString());                                               
                     }                    
-                    else if(fixedAccount.getPrincipal() < 0)
-                        amountTextField.setText("You don't have enough money");  
                     else
                     {
                         Float withdrew = fixedAccount.withdraw();
@@ -1119,6 +1127,11 @@ public class Assessment2 extends Application
                 {
                      
                 }   
+                if(fixedAccount.getPrincipal() < 0)
+                    {
+                        amountTextField.setText("You don't have enough money to withdraw");  
+                        balanceValueLabel.setText("$0");
+                    } 
             }
         });
         fifty.setOnAction(new EventHandler<ActionEvent>() 
@@ -1128,6 +1141,7 @@ public class Assessment2 extends Application
             {
                 try 
                 {
+                    amountTextField.setText("");
                     amountTextField.appendText("50");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -1145,8 +1159,6 @@ public class Assessment2 extends Application
                         balance = (fixedAccount.getPrincipal());
                         balanceValueLabel.setText("$" + balance.toString());                                               
                     }                    
-                    else if(fixedAccount.getPrincipal() < 0)
-                        amountTextField.setText("You don't have enough money");  
                     else
                     {
                         Float withdrew = fixedAccount.withdraw();
@@ -1160,6 +1172,11 @@ public class Assessment2 extends Application
                 {
                      
                 }   
+                if(fixedAccount.getPrincipal() < 0)
+                    {
+                        amountTextField.setText("You don't have enough money to withdraw");  
+                        balanceValueLabel.setText("$0");
+                    } 
             }
         });
         hundred.setOnAction(new EventHandler<ActionEvent>() 
@@ -1168,6 +1185,7 @@ public class Assessment2 extends Application
             public void handle(ActionEvent t) 
             {
                 try {   
+                    amountTextField.setText("");
                     amountTextField.appendText("100");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -1182,9 +1200,7 @@ public class Assessment2 extends Application
                         Float withdrew = fixedAccount.withdraw();
                         balance = (fixedAccount.getPrincipal());
                         balanceValueLabel.setText("$" + balance.toString());                                               
-                    }                    
-                    else if(fixedAccount.getPrincipal() < 0)
-                        amountTextField.setText("You don't have enough money");  
+                    }                                       
                     else
                     {
                         Float withdrew = fixedAccount.withdraw();
@@ -1197,7 +1213,12 @@ public class Assessment2 extends Application
                 } catch (InsufficientFundsException ex) 
                 {
                     
-                }   
+                } 
+                if(fixedAccount.getPrincipal() < 0)
+                    {
+                        amountTextField.setText("You don't have enough money to withdraw");  
+                        balanceValueLabel.setText("$0");
+                    } 
             }
         });
         clear.setOnAction(new EventHandler<ActionEvent>() {
@@ -1355,6 +1376,7 @@ public class Assessment2 extends Application
                     balanceValueLabel.setText("$" + balance.toString());
                     interestValueLabel.setText("$" + interestValue.toString());
                 }
+                depositTextField.setText("");
             }
         });
         //Creating and setting the number pad for the deposit with its text and text field
@@ -1435,7 +1457,8 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t) 
             {                   
-                try {                    
+                try {   
+                    amountTextField.setText("");
                     amountTextField.appendText("20");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -1443,7 +1466,7 @@ public class Assessment2 extends Application
                     chequeAccount.setHowMuchWithdraw(20f);                    
                     if(chequeAccount.getPrincipal() < 0)
                         {                      
-                            amountTextField.setText("You don't have enough money");  
+                            amountTextField.setText("You don't have enough money to withdraw");  
                         }
                     else
                     {
@@ -1465,7 +1488,8 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t) 
             {
-                try {                    
+                try {      
+                    amountTextField.setText("");
                     amountTextField.appendText("50");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -1473,7 +1497,7 @@ public class Assessment2 extends Application
                     chequeAccount.setHowMuchWithdraw(50f);                    
                     if(chequeAccount.getPrincipal() < 0)
                         {                      
-                            amountTextField.setText("You don't have enough money");  
+                            amountTextField.setText("You don't have enough money to withdraw");  
                         }
                     else
                     {
@@ -1494,7 +1518,8 @@ public class Assessment2 extends Application
             @Override
             public void handle(ActionEvent t) 
             {
-                try {                    
+                try {   
+                    amountTextField.setText("");
                     amountTextField.appendText("100");
                     value = Float.valueOf(amountTextField.getText());
                     withdrawValueLabel.setText("$" + value.toString());
@@ -1502,7 +1527,7 @@ public class Assessment2 extends Application
                     chequeAccount.setHowMuchWithdraw(100f);                    
                     if(chequeAccount.getPrincipal() < 0)
                         {                      
-                            amountTextField.setText("You don't have enough money");  
+                            amountTextField.setText("You don't have enough money to withdraw");  
                         }
                     else
                     {
@@ -1649,12 +1674,13 @@ public class Assessment2 extends Application
 
             @Override
             public void handle(ActionEvent t) 
-            {    
+            {   
                 deposit = Integer.valueOf(depositTextField.getText());
                 depositValueLabel.setText("$" + deposit.toString());
                 chequeAccount.setAmountDeposit(deposit);
                 chequeAccount.deposit();
                 balanceValueLabel.setText("$" + chequeAccount.getPrincipal());
+                depositTextField.setText("");
             }
         });
         //Creating and setting the number pad for the deposit with its text and text field
