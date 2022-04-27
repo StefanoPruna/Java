@@ -95,7 +95,6 @@ public class Inheritage {
         List<Integer> numbers = new ArrayList();
         numbers.add(1);
         numbers.add(2);
-        System.out.println(numbers.get(0) + numbers.get(1));
-       
+        System.out.println(numbers.get(0) + numbers.get(1));       
     }
 }
